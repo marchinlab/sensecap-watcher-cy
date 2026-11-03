@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="龙虾管家 ClawBot 项目横幅">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1020"/>
+      <stop offset="55%" stop-color="#0D1830"/>
+      <stop offset="100%" stop-color="#132038"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#3EE8FF" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#3EE8FF" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#3EE8FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B4B6B"/>
+      <stop offset="45%" stop-color="#1B2438"/>
+      <stop offset="100%" stop-color="#46587C"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#0A1424"/>
+      <stop offset="100%" stop-color="#050B14"/>
+    </linearGradient>
+    <linearGradient id="eye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9F8FF"/>
+      <stop offset="100%" stop-color="#4FD8F5"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="480" fill="url(#bg)"/>
+
+  <!-- 背景网格 -->
+  <g stroke="#5B7BB5" stroke-opacity="0.10" stroke-width="1">
+    <path d="M0 60H1200M0 120H1200M0 180H1200M0 240H1200M0 300H1200M0 360H1200M0 420H1200"/>
+    <path d="M80 0V480M180 0V480M280 0V480M380 0V480M480 0V480M580 0V480M680 0V480M780 0V480M880 0V480M980 0V480M1080 0V480"/>
+  </g>
+
+  <!-- 右侧光晕 -->
+  <circle cx="905" cy="240" r="290" fill="url(#halo)"/>
+
+  <!-- 左侧文案 -->
+  <text x="84" y="150" fill="#EAF3FF" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="62" font-weight="700" letter-spacing="2">龙虾管家</text>
+  <text x="86" y="200" fill="#4FD8F5" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="30" font-weight="500" letter-spacing="6">CLAWBOT</text>
+
+  <text x="86" y="258" fill="#A8BCD8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="23">给一块 ESP32-S3 圆屏手表装上</text>
+  <text x="86" y="296" fill="#A8BCD8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="23">会看人、会播报、会记事的私人 AI 管家</text>
+
+  <!-- 标签 -->
+  <g font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="17" fill="#9FE9FA">
+    <rect x="86" y="336" width="118" height="36" rx="18" fill="#4FD8F5" fill-opacity="0.10" stroke="#4FD8F5" stroke-opacity="0.40"/>
+    <text x="111" y="360">自研固件</text>
+    <rect x="216" y="336" width="140" height="36" rx="18" fill="#4FD8F5" fill-opacity="0.10" stroke="#4FD8F5" stroke-opacity="0.40"/>
+    <text x="241" y="360">自建服务端</text>
+    <rect x="368" y="336" width="132" height="36" rx="18" fill="#4FD8F5" fill-opacity="0.10" stroke="#4FD8F5" stroke-opacity="0.40"/>
+    <text x="393" y="360">端到端可控</text>
+  </g>
+
+  <!-- 手表 -->
+  <g transform="translate(905 240)">
+    <ellipse cx="0" cy="0" rx="182" ry="182" fill="#000" fill-opacity="0.55" filter="url(#softer)"/>
+    <circle r="176" fill="url(#bezel)"/>
+    <circle r="158" fill="#0A0F1A"/>
+    <circle r="150" fill="url(#screen)"/>
+
+    <!-- 屏幕反光 -->
+    <path d="M-104 -76 A128 128 0 0 1 96 -96" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+    <!-- 眼睛 -->
+    <g>
+      <ellipse cx="-52" cy="-6" rx="27" ry="44" fill="url(#eye)" filter="url(#soft)" opacity="0.85"/>
+      <ellipse cx="52" cy="-6" rx="27" ry="44" fill="url(#eye)" filter="url(#soft)" opacity="0.85"/>
+      <ellipse cx="-52" cy="-6" rx="27" ry="44" fill="url(#eye)"/>
+      <ellipse cx="52" cy="-6" rx="27" ry="44" fill="url(#eye)"/>
+      <!-- 瞳孔：朝向左侧，示意跟随 -->
+      <ellipse cx="-60" cy="-2" rx="9" ry="15" fill="#08202B" opacity="0.65"/>
+      <ellipse cx="44" cy="-2" rx="9" ry="15" fill="#08202B" opacity="0.65"/>
+      <!-- 高光 -->
+      <ellipse cx="-60" cy="-24" rx="7" ry="10" fill="#FFFFFF" opacity="0.75"/>
+      <ellipse cx="44" cy="-24" rx="7" ry="10" fill="#FFFFFF" opacity="0.75"/>
+    </g>
+
+    <!-- 状态条 -->
+    <rect x="-88" y="72" width="176" height="42" rx="21" fill="#4FD8F5" fill-opacity="0.12" stroke="#4FD8F5" stroke-opacity="0.35"/>
+    <circle cx="-62" cy="93" r="5" fill="#54F0A8"/>
+    <text x="-46" y="99" fill="#BFEFFF" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="17">正在播报 · 早报 03</text>
+  </g>
+
+  <!-- 底部说明 -->
+  <text x="84" y="432" fill="#6C86A8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="16">ESP32-S3 · LVGL · Node.js · MCP 工具桥接 · 本地唤醒</text>
+</svg>

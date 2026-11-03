@@ -1,0 +1,17 @@
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 临时文件
+*.tmp
+*.log
+~$*
+
+# 依赖（本项目为文档仓库，理论上不存在）
+node_modules/

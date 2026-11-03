@@ -1,0 +1,25 @@
+# License
+
+本项目仓库内的**文字、架构图与流程说明**（以下简称"文档"）采用
+**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+（CC BY-NC-SA 4.0）** 许可。
+
+## 你可以
+
+- **共享** — 以任何媒介或格式复制、发行本文档
+- **演绎** — 修改、转换或以本文档为基础进行创作
+
+## 但需遵守
+
+- **署名** — 必须注明来源与本许可，并说明是否作出修改
+- **非商业性使用** — 不得将本文档用于商业目的
+- **相同方式共享** — 若修改或基于本文档创作，须以相同许可分发
+
+## 说明
+
+- 本仓库**不含业务源码**；固件与服务端的实现代码保留在私有仓库中，不在本许可范围内。
+- 文中提及的第三方商标、硬件型号归其各自权利人所有。
+- 本项目为个人自用项目，按"现状"提供，不附带任何明示或默示担保。
+
+许可全文：<https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode>
+许可摘要（中文）：<https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans>
