@@ -117,6 +117,16 @@
   footer{margin-top:56px;padding-top:26px;border-top:2px dashed var(--line);font-size:14px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
   footer a{color:var(--ink-2)}
 
+  /* 表情图鉴 */
+  .facegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+  .face{background:var(--paper-2,rgba(255,255,255,.55));border:1px solid var(--line);border-radius:14px;padding:12px 12px 10px;text-align:center}
+  .face img{width:100%;border-radius:10px;display:block}
+  .face .fname{margin-top:8px;font-size:14px;color:var(--ink-2)}
+  .face .fname b{color:var(--ink);font-family:var(--mono,monospace);margin-right:6px;font-weight:600}
+  @media (max-width:640px){
+    .facegrid{grid-template-columns:repeat(2,1fr);gap:12px}
+  }
+
   @media (max-width:640px){
     h1{font-size:30px} .vtitle{font-size:20px}
     .row{grid-template-columns:1fr;gap:2px}
@@ -136,7 +146,7 @@
     <div class="meta">
       <span class="hot">v1.7.6-handamp 当前</span>
       <span>7 个已发布版本</span>
-      <span>曲库 120 首 · 电台 21 台</span>
+      <span>曲库 120 首 · 电台 21 台 · 待机表情 18 张</span>
       <span>2026-11-03 → 11-04</span>
       <span>每一版都有可回滚镜像</span>
     </div>
@@ -151,6 +161,7 @@
     <a href="#v174">v1.7.4</a>
     <a href="#v175">v1.7.5</a>
     <a href="#v176">v1.7.6</a>
+    <a href="#faces">表情图鉴</a>
     <a href="#music">音乐平台</a>
     <a href="#radio">网络电台</a>
     <a href="#rule">版本纪律</a>
@@ -305,6 +316,35 @@
         2. 幅度分级：默认 ±10° → <b>±17°</b>；手就放在围裙上方的三帧保持 <b>±12°</b>——圆圈必然压着衣服，回到 18° 又会带动围裙
       </div></div>
       <div class="row"><div class="k">验证</div><div class="v">7 个摆手帧在第 3 / 10 帧（最大摆角）下放大比对，围裙和衣服无旋转错位。</div></div>
+    </div>
+  </section>
+
+  <h2 class="sec" id="faces">设备侧 · 18 张待机表情图鉴</h2>
+  <p style="color:var(--ink-2);font-size:16px">待机时的轮播阵容——每张都是 <b>12 帧 / 90ms 的部件级动画</b>：眼睛每 1.3 秒眨一次，手部按帧摆动（干净的帧 ±17°，手贴围裙的帧收敛到 ±12°）。下面就是表上实际播出的动图。</p>
+
+  <section class="ver">
+    <div class="facegrid">
+      <div class="face"><img src="assets/petfish/fish_01.webp" alt="商场挥手" loading="lazy"><div class="fname"><b>01</b>商场挥手</div></div>
+      <div class="face"><img src="assets/petfish/fish_02.webp" alt="咖啡馆比 V" loading="lazy"><div class="fname"><b>02</b>咖啡馆比 V <span style="color:var(--accent)">★修过围裙</span></div></div>
+      <div class="face"><img src="assets/petfish/fish_03.webp" alt="游乐园气球" loading="lazy"><div class="fname"><b>03</b>游乐园气球</div></div>
+      <div class="face"><img src="assets/petfish/fish_04.webp" alt="樱花捂脸" loading="lazy"><div class="fname"><b>04</b>樱花捂脸</div></div>
+      <div class="face"><img src="assets/petfish/fish_05.webp" alt="海滩欢呼" loading="lazy"><div class="fname"><b>05</b>海滩欢呼</div></div>
+      <div class="face"><img src="assets/petfish/fish_06.webp" alt="城堡前惊讶" loading="lazy"><div class="fname"><b>06</b>城堡前惊讶</div></div>
+      <div class="face"><img src="assets/petfish/fish_07.webp" alt="雪山捧脸" loading="lazy"><div class="fname"><b>07</b>雪山捧脸</div></div>
+      <div class="face"><img src="assets/petfish/fish_08.webp" alt="夜市叹气" loading="lazy"><div class="fname"><b>08</b>夜市叹气 <span style="color:var(--ink-3)">±12°</span></div></div>
+      <div class="face"><img src="assets/petfish/fish_09.webp" alt="教室看书" loading="lazy"><div class="fname"><b>09</b>教室看书</div></div>
+      <div class="face"><img src="assets/petfish/fish_10.webp" alt="商店街吃面" loading="lazy"><div class="fname"><b>10</b>商店街吃面</div></div>
+      <div class="face"><img src="assets/petfish/fish_11.webp" alt="窗边抱膝" loading="lazy"><div class="fname"><b>11</b>窗边抱膝 <span style="color:var(--ink-3)">±12°</span></div></div>
+      <div class="face"><img src="assets/petfish/fish_12.webp" alt="摩天轮下" loading="lazy"><div class="fname"><b>12</b>摩天轮下</div></div>
+      <div class="face"><img src="assets/petfish/fish_13.webp" alt="樱花浅笑" loading="lazy"><div class="fname"><b>13</b>樱花浅笑</div></div>
+      <div class="face"><img src="assets/petfish/fish_14.webp" alt="海边耳机" loading="lazy"><div class="fname"><b>14</b>海边耳机</div></div>
+      <div class="face"><img src="assets/petfish/fish_15.webp" alt="城堡问号" loading="lazy"><div class="fname"><b>15</b>城堡问号 <span style="color:var(--ink-3)">±12°</span></div></div>
+      <div class="face"><img src="assets/petfish/fish_16.webp" alt="雪地吹气" loading="lazy"><div class="fname"><b>16</b>雪地吹气</div></div>
+      <div class="face"><img src="assets/petfish/fish_17.webp" alt="夜街眨眼" loading="lazy"><div class="fname"><b>17</b>夜街眨眼</div></div>
+      <div class="face"><img src="assets/petfish/fish_18.webp" alt="操场挥手" loading="lazy"><div class="fname"><b>18</b>操场挥手</div></div>
+    </div>
+    <div class="block" style="margin-top:20px">
+      <div class="row"><div class="k">规格</div><div class="v">412×412 源图 → 固件内 12 帧 / 90ms 部件动画；本页为 320px WebP 动图（18 张共 1.2MB）。★ 标出被 v1.7.5 / v1.7.6 动过刀的那张，±12° 是手贴围裙帧的收敛摆幅。</div></div>
     </div>
   </section>
 
