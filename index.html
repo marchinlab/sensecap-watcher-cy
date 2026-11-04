@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>龙虾管家 ClawBot · 固件版本史</title>
+<meta name="description" content="Seeed SenseCAP Watcher 自研固件 v1.6.3 → v1.7.6：每个版本的问题、根因、改法与踩坑记录。">
+<style>
+  :root{
+    --paper:#f7f1e3;
+    --paper-2:#fdfaf2;
+    --ink:#2b2723;
+    --ink-2:#5d5347;
+    --ink-3:#8d8071;
+    --line:rgba(120,96,60,.22);
+    --accent:#b4562f;
+    --teal:#2f6b62;
+    --plum:#7a4a86;
+    --navy:#35507a;
+    --shadow:0 1px 0 rgba(120,96,60,.08), 0 10px 30px -18px rgba(70,50,25,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(circle at 12% 0%, #fffdf6 0%, transparent 45%),
+      radial-gradient(circle at 88% 100%, #efe2c9 0%, transparent 50%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),#d9944f);z-index:60;transition:width .08s linear}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 26px 90px}
+
+  header.hero{padding:76px 0 34px;border-bottom:2px dashed var(--line)}
+  .kicker{font-size:13px;letter-spacing:.22em;color:var(--ink-3);text-transform:uppercase}
+  h1{font-size:44px;line-height:1.25;letter-spacing:1px;margin:14px 0 10px;font-weight:800}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lead{font-size:17px;color:var(--ink-2);max-width:640px}
+  .meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta span{font-size:13px;padding:5px 13px;border-radius:999px;background:#efe4cf;color:#6b5a41;border:1px solid var(--line)}
+  .meta span.hot{background:var(--accent);color:#fff8ef;border-color:transparent}
+
+  nav{position:sticky;top:0;z-index:50;margin:0 -26px;padding:10px 26px;
+      background:rgba(247,241,227,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .inner{max-width:868px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  nav .inner::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap;font-size:13px;color:var(--ink-2);text-decoration:none;padding:6px 11px;border-radius:7px;border:1px solid transparent;transition:.15s}
+  nav a:hover{background:#efe4cf;border-color:var(--line);color:var(--ink)}
+  nav a.cur{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+
+  .note{margin:34px 0 8px;padding:16px 18px;border-left:3px solid var(--accent);background:rgba(255,253,246,.7);border-radius:0 10px 10px 0;font-size:15px;color:var(--ink-2)}
+  .note b{color:var(--ink)}
+
+  section.ver{padding:34px 0 8px;border-bottom:1px solid var(--line)}
+  section.ver:last-of-type{border-bottom:none}
+  .vhead{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .tag{
+    font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:15px;font-weight:700;
+    padding:4px 11px;border-radius:8px;background:#fffdf6;border:1px solid var(--line);
+    color:var(--accent);box-shadow:var(--shadow);white-space:nowrap
+  }
+  .tag.base{color:var(--teal)}
+  .tag.dead{color:var(--ink-3);text-decoration:line-through}
+  .vtitle{font-size:25px;font-weight:700;letter-spacing:.5px;flex:1;min-width:260px}
+  .vdate{font-size:13px;color:var(--ink-3);padding-top:8px;font-family:ui-monospace,Consolas,monospace}
+
+  .block{margin-top:14px;padding-left:2px}
+  .row{display:grid;grid-template-columns:64px 1fr;gap:12px;margin-top:9px}
+  .row .k{font-size:12px;letter-spacing:.14em;color:var(--ink-3);padding-top:4px}
+  .row .v{font-size:16px;color:var(--ink-2)}
+  .row .v b{color:var(--ink)}
+  code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:.88em;background:#efe4cf;padding:1px 6px;border-radius:5px;color:#5a4632}
+
+  .chip{display:inline-block;font-size:12px;padding:2px 9px;border-radius:6px;border:1px solid var(--line);color:var(--ink-3);margin-left:6px;vertical-align:2px}
+
+  ul.tight{margin:6px 0 0 0;padding-left:20px;color:var(--ink-2);font-size:16px}
+  ul.tight li{margin:3px 0}
+
+  .lesson{margin-top:16px;padding:13px 16px;background:#f2e8d3;border-radius:9px;font-size:15px;color:#5c4a33;border:1px dashed rgba(120,96,60,.3)}
+  .lesson b{color:var(--accent)}
+
+  h2.sec{margin:46px 0 12px;font-size:27px;letter-spacing:.5px}
+  .rule{counter-reset:step;margin-top:8px}
+  .rule li{list-style:none;position:relative;padding:11px 0 11px 46px;border-bottom:1px dashed var(--line);font-size:16px;color:var(--ink-2)}
+  .rule li:last-child{border-bottom:none}
+  .rule li::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;left:0;top:12px;width:28px;height:28px;border-radius:50%;
+    background:var(--ink);color:var(--paper-2);font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center
+  }
+  .rule li b{color:var(--ink)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+  .card{background:#fffdf6;border:1px solid var(--line);border-radius:12px;padding:16px 17px;box-shadow:var(--shadow)}
+  .card h3{font-size:15px;letter-spacing:.04em;margin-bottom:6px}
+  .card p{font-size:14.5px;color:var(--ink-2)}
+  .card:nth-child(1) h3{color:var(--accent)}
+  .card:nth-child(2) h3{color:var(--teal)}
+  .card:nth-child(3) h3{color:var(--plum)}
+  .card:nth-child(4) h3{color:var(--navy)}
+  .card:nth-child(5) h3{color:#8a6b2f}
+  .card:nth-child(6) h3{color:#a04a4a}
+
+  footer{margin-top:56px;padding-top:26px;border-top:2px dashed var(--line);font-size:14px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+  footer a{color:var(--ink-2)}
+
+  @media (max-width:640px){
+    h1{font-size:30px} .vtitle{font-size:20px}
+    .row{grid-template-columns:1fr;gap:2px}
+    .row .k{padding-top:6px}
+    header.hero{padding-top:46px}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">ClawBot · Firmware History</div>
+    <h1>一块手表的两天，<em>七个固件版本</em></h1>
+    <p class="lead">Seeed SenseCAP Watcher（ESP32-S3）自研固件的版本记录。从首次公开上架到今天，每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
+    <div class="meta">
+      <span class="hot">v1.7.6-handamp 当前</span>
+      <span>7 个已发布版本</span>
+      <span>2026-11-03 → 11-04</span>
+      <span>每一版都有可回滚镜像</span>
+    </div>
+  </header>
+
+  <nav><div class="inner">
+    <a href="#base">起点 v1.6.3</a>
+    <a href="#v170">v1.7.0</a>
+    <a href="#v171">v1.7.1</a>
+    <a href="#v172">v1.7.2</a>
+    <a href="#v173">v1.7.3</a>
+    <a href="#v174">v1.7.4</a>
+    <a href="#v175">v1.7.5</a>
+    <a href="#v176">v1.7.6</a>
+    <a href="#rule">版本纪律</a>
+    <a href="#lesson">沉淀</a>
+  </div></nav>
+
+  <div class="note">
+    <b>为什么两天能发七版？</b> 因为改了就要立刻上机，上机就会暴露新问题。屏幕上的一个"圈在转"、耳朵里的一声没出，都会变成下一条修复目标——版本号不是为了好看，是为了<b>能退回上一版</b>。
+  </div>
+
+  <section class="ver" id="base">
+    <div class="vhead">
+      <span class="tag base">v1.6.3</span>
+      <div class="vtitle">起点：公开上架时设备上跑的版本</div>
+      <div class="vdate">2026-11-02</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">背景</div><div class="v">它本身也是一次事故的产物：上一版把"什么时候去拉消息"写成了<b>黑名单</b>（不在这些状态就都拉），开机早期 <code>Unknown/Starting</code> 被放行，lwip 还没就绪就去建 HTTP 连接，断言失败，设备 <b>2.5 秒一次无限重启</b>。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">改回<b>白名单</b>（空闲 + 聆听），并保留上版的设计意图：收到消息先把 CPU 和背光从省电档拉回来，轮询周期 6 秒 → 5 秒。</div></div>
+      <div class="row"><div class="k">结果</div><div class="v">串口实测：拿到消息到起播 <b>0.4 秒</b>，设备待机时也会自动亮屏开口，不需要喊唤醒词。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>涉及网络调用的状态判断必须用白名单。黑名单永远会漏掉某个你还不知道的状态。</div>
+  </section>
+
+  <section class="ver" id="v170">
+    <div class="vhead">
+      <span class="tag">v1.7.0</span>
+      <div class="vtitle">把"胶囊眼"换成全身小人<span class="chip">形象重构</span></div>
+      <div class="vdate">11-04</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">待机界面是 LVGL 画的一对胶囊形眼睛，演示时很难让人一眼看出"这是一个有形象的角色"。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">
+        <ul class="tight">
+          <li>18 张 412×412 全屏 GIF，AI 垫参考图生成，形象统一：深蓝渐变长卷发少女，18 套表情动作 + 场景背景（咖啡馆 / 游乐园 / 樱花树 / 海滩 / 城堡 / 雪山 / 学校…）</li>
+          <li>待机每 5 秒换一张，洗牌抽样，18 张全露脸才可能重复</li>
+          <li>按<span>图中眼睛朝向</span>分池（左 6 / 中 6 / 右 6），播报时按摄像头人脸位置切对应方向的图——形象换了，视觉跟随没丢</li>
+        </ul>
+      </div></div>
+      <div class="row"><div class="k">踩坑</div><div class="v">右下角"AI 生成"水印，第一版用"水印左侧的地面块"去覆盖，结果把角色的鞋子复制到了右下角——<b>18 张图每张都多出一双孤立的小黑鞋</b>。改用"水印正上方"的地面块才接得上纹理。</div></div>
+      <div class="row"><div class="k">代价</div><div class="v">资源分区 5.49MB → 9.06MB（分区 14MB，余量充足）。</div></div>
+    </div>
+  </section>
+
+  <section class="ver" id="v171">
+    <div class="vhead">
+      <span class="tag">v1.7.1</span>
+      <div class="vtitle">三件"看起来像坏了"的事<span class="chip">bugfix</span></div>
+      <div class="vdate">11-04</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">① 不换图</div><div class="v"><b>待机永远停在同一张。</b>计数器 <code>pet_idle_ms_ = 0</code> 写在了 idle 判定<b>之前</b>，每 33ms 先清零再累加，永远到不了 5000ms 的换图阈值。改成只在"确实离开待机"时清零。</div></div>
+      <div class="row"><div class="k">② 闪旧眼</div><div class="v"><b>每次开机先闪一下旧形象。</b>资源加载有约 5 秒空窗，原实现拿胶囊眼顶着。改成空窗期压住表情层，资源一就绪立刻换鱼；重试从 5 秒一次改 1 秒一次，连续 8 次失败才兜底回落（防止真黑屏）。</div></div>
+      <div class="row"><div class="k">③ 假动画</div><div class="v"><b>GIF 根本没在动。</b>2 帧版本的帧间差异平均只有 0.13，人眼不可辨。重做成 6 帧 / 150ms：角色浮动 ±6px + 左右摆 ±4px（错相），裙摆头发按高度剪切飘动，<b>背景完全静止</b>。</div></div>
+      <div class="row"><div class="k">踩坑</div><div class="v">GIF 每帧都是全量帧，8 帧全画面动要 9~15MB，直接写爆 14MB 分区。<b>背景必须不动</b>，只有角色带变化，压缩率才扛得住（264KB/张）。</div></div>
+    </div>
+  </section>
+
+  <section class="ver" id="v172">
+    <div class="vhead">
+      <span class="tag">v1.7.2</span>
+      <div class="vtitle">从整体浮动，到部件级动画<span class="chip">新功能</span></div>
+      <div class="vdate">11-04</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">反馈</div><div class="v">整体浮动"人眼看起来有卡顿"，要的是<b>人物眼睛和手在动</b>，不是整幅图一上一下。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">背景与身体完全静止，只有两个部件动：<br>
+        · <b>眨眼</b>：每张底图用图生图生成"闭眼微笑"变体（17 张，高保真模式），模板匹配对齐眼位 → 把闭眼版的眼周椭圆羽化贴回 = 闭眼帧。14 帧 / 90ms，约 1.26 秒眨一次<br>
+        · <b>手摆</b>：8 张有独立手臂的，以腕部为轴把手部圆圈旋转 ±10°（正弦全程摆）；手贴脸或持物的 10 张不做，摆了会穿帮</div></div>
+      <div class="row"><div class="k">结果</div><div class="v">体积反而从 4.7MB 降到 3.4MB——变化区域从"整个角色带"缩到"眼 + 手"，压缩得更狠。</div></div>
+      <div class="row"><div class="k">废案</div><div class="v">最初试过"纵向压缩眼区"做眨眼，出来是糊掉的脸色块——压缩加边缘拉伸根本不像闭眼。</div></div>
+    </div>
+  </section>
+
+  <section class="ver" id="v173">
+    <div class="vhead">
+      <span class="tag">v1.7.3</span>
+      <div class="vtitle">黑斑、眼罩，与标定错位<span class="chip">bugfix</span></div>
+      <div class="vdate">11-04 12:20</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">① 摆幅要更大 ② 几个表情闭眼时<b>隐约还能看到眼睛</b> ③ 某张表情眨眼变成一块<b>黑斑</b>。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">
+        · 黑斑：那张图的自动标定把模板匹配到了背景上，眼位飘到画面外（1.49, 1.31），贴回时把画外黑边拉进了眼睛区<br>
+        · 隐约见眼：第一轮 AI 闭眼变体擅自把深蓝刘海重绘成浅灰紫，贴回后像戴了"浅色眼罩"，人工椭圆还盖不满大眼睛
+      </div></div>
+      <div class="row"><div class="k">改法</div><div class="v">
+        1. 17 张闭眼变体全部重新生成，prompt 锁死"只改眼睛，发色/背景/皮肤一个像素都不许动"<br>
+        2. 贴回算法换成<b>自动差异法</b>：原图与闭眼版逐像素比较，<code>diff &gt; 38</code> → 连通域 ≥ 40px → 膨胀 11px → 羽化，直接得到 mask，不再依赖人工眼框<br>
+        3. 错标那张人工重标，并加坏坐标防御：出界或偏移 &gt; 0.12 自动重新匹配<br>
+        4. 摆幅 ±10° → ±18°
+      </div></div>
+      <div class="row"><div class="k">验证</div><div class="v">17 张闭眼帧的眼部拼图全过：无残留瞳孔、无黑斑、无浅色眼罩。</div></div>
+    </div>
+  </section>
+
+  <section class="ver" id="v174">
+    <div class="vhead">
+      <span class="tag">v1.7.4</span>
+      <div class="vtitle">模型"答应了但不干活"<span class="chip">架构性修复</span></div>
+      <div class="vdate">11-04 13:05</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">对它说"放首歌"，它嘴上答应，屏幕回 standby，<b>一声没出</b>。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">
+        1. 设备端大模型收到"请调用播放工具"的指令后<b>不执行</b>——口头答应就走人；语音通道没有直推工具的能力，服务端没法替它调<br>
+        2. 更隐蔽的一个：曲库音频全是<b>立体声</b>，而设备解码器只认单声道 Ogg Opus。TTS 恰好是单声道，所以新闻一直能播，只有音乐不出声
+      </div></div>
+      <div class="row"><div class="k">改法</div><div class="v">
+        1. 固件新增串口命令 <code>lmusic play &lt;url&gt;</code> / <code>lmusic stop</code>，直接调播放器；服务端匹配到歌就<b>走串口直发</b>，不再指望模型自觉<br>
+        2. 转码管线补 <code>-ac 1</code>，存量 120 首原位重转单声道
+      </div></div>
+      <div class="row"><div class="k">验证</div><div class="v">串口下发 → 设备 <code>idle → notifying</code> → 拉流 40 秒以上无断 → 停止命令正常。</div></div>
+    </div>
+    <div class="lesson"><b>方法论：</b>能用串口直发的，就不要依赖模型的自觉性。这套做法后来直接撑起了整套网络电台。</div>
+  </section>
+
+  <section class="ver" id="v175">
+    <div class="vhead">
+      <span class="tag">v1.7.5</span>
+      <div class="vtitle">按了，停不住<span class="chip">交互修复</span></div>
+      <div class="vdate">11-04 14:48</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">电台在播时按旋钮停不了；播放中喊唤醒词也听不到（这条其实是正常的——单通道，播报时麦克风不喂唤醒词，得先按停或等它说完）。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">两条路叠在一起：<br>
+        · 旋钮老逻辑是"停播 + 顺手开会话"，看起来像没停<br>
+        · 服务端已经串口下发成功，<b>设备端模型又补发了一次播放请求</b>，同一地址排进队列，在播放态每 300ms 重试、能等 12 秒。你按停、设备刚回空闲，队列里那条请求<b>立刻又把它拉起来</b></div></div>
+      <div class="row"><div class="k">改法</div><div class="v">
+        1. 单击时若播放器还在播 / 还在排队，直接停止并返回，不再开会话<br>
+        2. 停止时连活动地址与播放标志一起清，堵住"停了 300ms 又响"<br>
+        3. 播放请求加同一 URL 去重<br>
+        4. 起播前二次校验队列没被清掉（防竞态）<br>
+        5. 新增串口命令 <code>state</code>：打印设备状态 / 唤醒词运行位 / 语音处理运行位
+      </div></div>
+      <div class="row"><div class="k">语义</div><div class="v">按一下＝停（停在待机），要说话再按一下。</div></div>
+      <div class="row"><div class="k">验证</div><div class="v">串口日志实证：播报中按键出现 <code>State: notifying → idle</code>。</div></div>
+    </div>
+  </section>
+
+  <section class="ver" id="v176">
+    <div class="vhead">
+      <span class="tag">v1.7.6</span>
+      <div class="vtitle">一个错标在脸上的圆圈<span class="chip">参数调优</span></div>
+      <div class="vdate">11-04 15:15</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">某张表情（咖啡馆比 V）待机时"<b>围裙有一个圈在转</b>"；其他表情手摆幅度偏小。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">那张图的手部圆圈标在 <b>(0.66, 0.54)</b>——按网格看是<b>脸颊和头发</b>的位置，真正比 V 的手在画面左侧；转轴 (0.60, 0.65) 又压在衣服上。所以转起来既带动脸边、也带动围裙。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">
+        1. 该帧<b>卸掉手摆</b>，完全静止（坐标本身标错，就地修正不如先停）<br>
+        2. 幅度分级：默认 ±10° → <b>±17°</b>；手就放在围裙上方的三帧保持 <b>±12°</b>——圆圈必然压着衣服，回到 18° 又会带动围裙
+      </div></div>
+      <div class="row"><div class="k">验证</div><div class="v">7 个摆手帧在第 3 / 10 帧（最大摆角）下放大比对，围裙和衣服无旋转错位。</div></div>
+    </div>
+  </section>
+
+  <h2 class="sec" id="rule">版本纪律</h2>
+  <p style="color:var(--ink-2);font-size:16px">每一版都走同一套流程，不允许跳步：</p>
+  <ol class="rule">
+    <li><b>改版本头</b>：版本号 / 日期 / 说明三段一起改，说明里写清"改了什么、为什么"。</li>
+    <li><b>编译</b>：ESP-IDF v6.0，自定义唤醒词与阈值作为编译参数固定下来。</li>
+    <li><b>校验产物版本串</b>：在 bin 里 grep 版本号确认等于版本头——出现过"编译发生在改版本号之前"，备份下来的镜像其实是上一版。</li>
+    <li><b>备份五件套</b>：bootloader / 分区表 / ota_data / 应用镜像 / 资源镜像，按版本号归档。</li>
+    <li><b>写台账</b>：追加一条记录，含根因与验证方式。</li>
+    <li><b>双分区烧写</b>：运行分区与备用分区写同一份镜像。只写一个的话，一旦回滚就启动另一分区的旧固件，表现为"烧了新版但版本号还是旧的"。</li>
+  </ol>
+  <div class="note" style="margin-top:18px">判断设备当前版本<b>不要看开机日志里的编译时间</b>（构建系统不刷新那行），看开机打印的 <code>FW vX.Y.Z</code>，或串口敲 <code>version</code>。</div>
+
+  <h2 class="sec" id="lesson">沉淀下来的几条</h2>
+  <div class="grid">
+    <div class="card"><h3>状态判断用白名单</h3><p>黑名单必然漏掉你还不知道的状态。那条 2.5 秒无限重启就是这么来的。</p></div>
+    <div class="card"><h3>别指望模型自觉</h3><p>模型会答应，但不一定调工具。能走串口直发的，就走串口。</p></div>
+    <div class="card"><h3>解码能力是硬约束</h3><p>设备只认单声道 Ogg Opus，音频管线必须按它转码，不是反过来。</p></div>
+    <div class="card"><h3>动画做部件级</h3><p>背景静止、只有眼和手动，既自然又能把体积压下来。</p></div>
+    <div class="card"><h3>参数要看图验证</h3><p>坐标标错半格、圆圈压到衣服，只有把帧放大拼一起逐帧比才看得出来。</p></div>
+    <div class="card"><h3>每版都能回滚</h3><p>五件套 + 台账，任何一版出问题都能几分钟退回上一版。</p></div>
+  </div>
+
+  <footer>
+    <span>龙虾管家 ClawBot · 固件版本史</span>
+    <span>·</span>
+    <a href="https://github.com/marchinlab/xiaozhi-showcase">GitHub 仓库</a>
+    <span>·</span>
+    <a href="docs/firmware-history.md">Markdown 版本</a>
+    <span>·</span>
+    <span>更新至 v1.7.6-handamp（2026-11-04）</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('bar');
+  var links=[].slice.call(document.querySelectorAll('nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement;
+    var p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+    bar.style.width=(p*100).toFixed(2)+'%';
+    var idx=-1;
+    for(var i=0;i<secs.length;i++){
+      if(secs[i] && secs[i].getBoundingClientRect().top<=140) idx=i;
+    }
+    links.forEach(function(a,i){a.classList.toggle('cur',i===idx);});
+  }
+  document.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
