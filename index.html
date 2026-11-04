@@ -106,6 +106,14 @@
   .card:nth-child(5) h3{color:#8a6b2f}
   .card:nth-child(6) h3{color:#a04a4a}
 
+  pre.flow{
+    margin-top:14px;padding:15px 17px;background:#221f1b;color:#f0e6d2;border-radius:11px;
+    font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;font-size:13.5px;line-height:1.85;
+    overflow-x:auto;box-shadow:var(--shadow)
+  }
+  pre.flow .c{color:#c9a06a}
+  pre.flow .g{color:#8fbfa8}
+
   footer{margin-top:56px;padding-top:26px;border-top:2px dashed var(--line);font-size:14px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
   footer a{color:var(--ink-2)}
 
@@ -124,10 +132,11 @@
   <header class="hero">
     <div class="kicker">ClawBot · Firmware History</div>
     <h1>一块手表的两天，<em>七个固件版本</em></h1>
-    <p class="lead">Seeed SenseCAP Watcher（ESP32-S3）自研固件的版本记录。从首次公开上架到今天，每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
+    <p class="lead">Seeed SenseCAP Watcher（ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记两条能力线（自建音乐平台、网络电台）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
     <div class="meta">
       <span class="hot">v1.7.6-handamp 当前</span>
       <span>7 个已发布版本</span>
+      <span>曲库 120 首 · 电台 21 台</span>
       <span>2026-11-03 → 11-04</span>
       <span>每一版都有可回滚镜像</span>
     </div>
@@ -142,6 +151,8 @@
     <a href="#v174">v1.7.4</a>
     <a href="#v175">v1.7.5</a>
     <a href="#v176">v1.7.6</a>
+    <a href="#music">音乐平台</a>
+    <a href="#radio">网络电台</a>
     <a href="#rule">版本纪律</a>
     <a href="#lesson">沉淀</a>
   </div></nav>
@@ -294,6 +305,100 @@
         2. 幅度分级：默认 ±10° → <b>±17°</b>；手就放在围裙上方的三帧保持 <b>±12°</b>——圆圈必然压着衣服，回到 18° 又会带动围裙
       </div></div>
       <div class="row"><div class="k">验证</div><div class="v">7 个摆手帧在第 3 / 10 帧（最大摆角）下放大比对，围裙和衣服无旋转错位。</div></div>
+    </div>
+  </section>
+
+  <h2 class="sec" id="music">服务端之一 · 自建音乐平台</h2>
+  <p style="color:var(--ink-2);font-size:16px">曲库从 3 首试听曲长到 120 首，这条线没有版本号，但每一步都是被一个具体故障推着走的。</p>
+
+  <section class="ver">
+    <div class="vhead">
+      <span class="tag base">第一轮</span>
+      <div class="vtitle">先把管子拓宽</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">起点</div><div class="v">曲库只有 3 首试听曲，管理页上传上限 <b>25MB</b>，连一首 41MB 的无损都传不进去。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">
+        · 上限 25MB → <b>300MB</b><br>
+        · 前端原来把文件 base64 塞进 JSON（体积膨胀 1/3、大文件必超时），改成 <b>XHR 直传二进制 + 实时进度条</b><br>
+        · 服务端同步放宽请求体限制，鉴权兼容 query 参数与请求头两种方式
+      </div></div>
+      <div class="row"><div class="k">验证</div><div class="v">41MB WAV 直传成功，转成 Ogg 后 915KB。</div></div>
+    </div>
+  </section>
+
+  <section class="ver">
+    <div class="vhead">
+      <span class="tag base">第二轮</span>
+      <div class="vtitle">批量灌库：3 首 → 120 首</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">改法</div><div class="v">写了个批量脚本遍历本地音乐目录，从"歌手 - 歌名"前缀解析元数据，跳过已入库的；一批 Taylor Swift（8 首）+ 一批粤语（卫兰 / 容祖儿 / 李克勤 / 许美静 / 郑秀文许志安 / 粤语经典，109 首）。</div></div>
+      <div class="row"><div class="k">结果</div><div class="v">曲库 <b>3 → 120 首</b>，全部 24k 单声道 Ogg，合计 93MB。</div></div>
+    </div>
+  </section>
+
+  <section class="ver">
+    <div class="vhead">
+      <span class="tag base">第三轮</span>
+      <div class="vtitle">为什么"答应了却不播"</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">第一层</div><div class="v">和 v1.7.4 是同一个事故的两个面：设备端模型收到"请调用播放工具"的指令后只<b>口头答应</b>，并不执行。服务端的解法是不再请求模型——匹配到歌之后，由服务端<b>直接下发</b>，把地址推给播放器。</div></div>
+      <div class="row"><div class="k">第二层</div><div class="v">改完发现 120 首<b>一声不出</b>，设备日志报 <code>Only mono Ogg Opus streams are supported</code>。转码管线少了单声道参数，而 TTS 恰好是单声道——所以新闻一直正常，只有音乐哑火。补参数，并把存量 120 首<b>原位重转</b>（120/0 全部成功）。</div></div>
+      <div class="row"><div class="k">插曲</div><div class="v">写脚本读 Ogg Opus 头判断声道数时读错了字节偏移（声道数在 magic+9，不是 +8 或 +10），第一版结论是"全是单声道"，白查一轮。</div></div>
+    </div>
+    <div class="lesson"><b>小结：</b>"能搜到、能匹配、能下发、能出声"是四段独立链路，任何一段断掉，用户看到的都是同一个现象——没声音。</div>
+  </section>
+
+  <h2 class="sec" id="radio">服务端之二 · 网络电台</h2>
+  <p style="color:var(--ink-2);font-size:16px">目标很朴素：让它当一台收音机，主要听香港、英国、美国的台，而且要真的能播——不接受"列表里有但点不动"。</p>
+
+  <section class="ver">
+    <div class="vhead">
+      <span class="tag base">选源</span>
+      <div class="vtitle">公开电台目录 + 一层实时转码</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">选源</div><div class="v">用公开的电台目录接口按国家码 + 标签检索，按票数排序、过滤掉已失效的流。两个坑：接口要求带 User-Agent；本机走系统代理，而 Node 的原生 fetch <b>不读系统代理</b>，境外请求必须显式挂代理，否则一律超时。</div></div>
+      <div class="row"><div class="k">第一版崩点</div><div class="v">设备端只吃<b>单声道 Ogg Opus</b>，而电台源是 MP3 / AAC / HLS 直播流——所以服务端做了一层<b>实时转码代理</b>，边转边推：</div></div>
+    </div>
+<pre class="flow"><span class="c">设备</span> GET /api/radio/stream?id=xx
+   <span class="g">→</span> 服务端 spawn ffmpeg 拉直播源
+   <span class="g">→</span> -fflags nobuffer -flags low_delay   <span class="c"># 低延迟，别攒缓冲</span>
+   <span class="g">→</span> libopus 24k / 24kHz / 单声道
+   <span class="g">→</span> chunked 分块推给设备            <span class="c"># 边转边推，不是转完再给</span></pre>
+    <div class="block">
+      <div class="row"><div class="k">细节</div><div class="v">同一台被重复请求时复用同一个 ffmpeg 进程，避免多开把上行占满；请求断开就杀掉子进程。</div></div>
+      <div class="row"><div class="k">落地</div><div class="v">21 台：香港 6（港台 1/2/5 与普通话台在内）、英国 5（BBC World Service、Classic FM、LBC、Capital、Heart 80s）、美国音乐 4、美国新闻 6（MSNBC / CNN / Fox / NPR / NBC / Bloomberg）。</div></div>
+    </div>
+  </section>
+
+  <section class="ver">
+    <div class="vhead">
+      <span class="tag base">验证</span>
+      <div class="vtitle">"能不能播"浏览器里看不出来</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">真机计时</div><div class="v">
+        · RTHK 第一台：连续播 60 秒无断流，设备空闲内存稳定在 37–39KB<br>
+        · 播放中直接换台：旧流停、新流起，不卡死<br>
+        · 6 个美国新闻台逐个过：全部可播，CNN、Fox 起播偏慢（约 8 秒），30 秒窗口内稳定
+      </div></div>
+      <div class="row"><div class="k">坑①</div><div class="v"><b>不能用统一阈值判断"流是否健康"</b>：HLS 源会预缓冲（14 秒拉到 40 秒的量），MP3 直播源是实时速率（14 秒就是 14 秒），同一套阈值必然误判其中一类。</div></div>
+      <div class="row"><div class="k">坑②</div><div class="v"><b>换台必须先停</b>：播放器只在空闲态接受新的播放请求，直接发新地址会一直排队到超时。所以每次切台都是"先停再播"，中间约 1 秒静音——单通道的必然代价。</div></div>
+      <div class="row"><div class="k">坑③</div><div class="v">本地 ffmpeg 直接拉境外源被网络策略挡住，改为统一走服务端转码端点验证。</div></div>
+    </div>
+  </section>
+
+  <section class="ver">
+    <div class="vhead">
+      <span class="tag base">收尾</span>
+      <div class="vtitle">接进语音，然后印成一张纸</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">工具</div><div class="v">新增三个工具：开台 / 列台 / 停播。台名做了中英别名表（"BBC""国际台""古典台""福克斯""伦敦台""粤曲台"都能认），并且<b>沿用最初那份 21 台清单的编号</b>——说"第 16 台"必须真的是 MSNBC，编号重排过一次会让所有口令错位。</div></div>
+      <div class="row"><div class="k">一个"故障"</div><div class="v">播放中喊唤醒词没反应，不是坏了：播音时设备处于播报态，单通道下麦克风不喂唤醒词。要换台就"先按停，再喊唤醒词"。这条最后变成了一张桌面速查图，把 21 台和口令印在一起。</div></div>
     </div>
   </section>
 
