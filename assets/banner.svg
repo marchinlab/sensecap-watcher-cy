@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="龙虾管家 ClawBot 项目横幅">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="SenseCAP Watcher CY 定制版 项目横幅">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0A1020"/>
@@ -43,8 +43,8 @@
   <circle cx="905" cy="240" r="290" fill="url(#halo)"/>
 
   <!-- 左侧文案 -->
-  <text x="84" y="150" fill="#EAF3FF" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="62" font-weight="700" letter-spacing="2">龙虾管家</text>
-  <text x="86" y="200" fill="#4FD8F5" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="30" font-weight="500" letter-spacing="6">CLAWBOT</text>
+  <text x="84" y="152" fill="#EAF3FF" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="50" font-weight="700" letter-spacing="1">SenseCAP Watcher</text>
+  <text x="86" y="202" fill="#4FD8F5" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="28" font-weight="500" letter-spacing="8">CY 定制版</text>
 
   <text x="86" y="258" fill="#A8BCD8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="23">给一块 ESP32-S3 圆屏手表装上</text>
   <text x="86" y="296" fill="#A8BCD8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="23">会看人、会播报、会记事的私人 AI 管家</text>
