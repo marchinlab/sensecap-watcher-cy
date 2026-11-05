@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SenseCAP Watcher CY 定制版 · 固件版本史</title>
-<meta name="description" content="SenseCAP Watcher CY 定制版：自研固件 v1.6.3 → v1.7.6 每个版本的问题、根因、改法与踩坑记录，含自建音乐平台与 21 台网络电台。">
+<title>SenseCAP Watcher CY 定制版 · 固件与服务端更新日志</title>
+<meta name="description" content="SenseCAP Watcher CY 定制版：自研固件 v1.6.3 → v1.7.15 共 14 版的根因与改法，含逐字字幕、拍照识别、常驻角色、网络电台与智能家居接入。">
 <style>
   :root{
     --paper:#f7f1e3;
@@ -105,6 +105,12 @@
   .card:nth-child(4) h3{color:var(--navy)}
   .card:nth-child(5) h3{color:#8a6b2f}
   .card:nth-child(6) h3{color:#a04a4a}
+  .card:nth-child(7) h3{color:var(--accent)}
+  .card:nth-child(8) h3{color:var(--teal)}
+  .card:nth-child(9) h3{color:var(--plum)}
+  .card:nth-child(10) h3{color:var(--navy)}
+  .card:nth-child(11) h3{color:#8a6b2f}
+  .card:nth-child(12) h3{color:#a04a4a}
 
   pre.flow{
     margin-top:14px;padding:15px 17px;background:#221f1b;color:#f0e6d2;border-radius:11px;
@@ -127,6 +133,30 @@
     .facegrid{grid-template-columns:repeat(2,1fr);gap:12px}
   }
 
+  /* 角色表情包 / 能力矩阵 */
+  .emogrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+  .emo{background:#fffdf6;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+  .emo img{width:100%;display:block}
+  .emo .en{margin-top:6px;font-size:14px;color:var(--ink-2)}
+  .emo .en b{color:var(--ink);font-family:ui-monospace,Consolas,monospace;margin-right:5px}
+  table.cap{width:100%;border-collapse:collapse;margin-top:16px;font-size:15px}
+  table.cap th,table.cap td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;color:var(--ink-2)}
+  table.cap th{background:#efe4cf;color:var(--ink);font-weight:700;white-space:nowrap}
+  table.cap td b{color:var(--ink)}
+  .pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid var(--line);background:#f2e8d3;color:#6b5a41;margin:2px 4px 2px 0}
+  .pill.hot{background:var(--accent);color:#fff8ef;border-color:transparent}
+  .pill.dim{background:transparent;color:var(--ink-3)}
+  @media (max-width:640px){
+    .emogrid{grid-template-columns:repeat(2,1fr)}
+    table.cap{font-size:13.5px}
+    table.cap th,table.cap td{padding:6px 7px}
+  }
+
+  /* 宽屏把 25 个导航入口铺成两行，别让用户以为只有前半页 */
+  @media (min-width:900px){
+    nav .inner{flex-wrap:wrap;overflow-x:visible;row-gap:4px}
+  }
+
   @media (max-width:640px){
     h1{font-size:30px} .vtitle{font-size:20px}
     .row{grid-template-columns:1fr;gap:2px}
@@ -140,14 +170,15 @@
 <div class="wrap">
 
   <header class="hero">
-    <div class="kicker">SenseCAP Watcher · CY 定制版 · Firmware History</div>
-    <h1>一块手表的两天，<em>七个固件版本</em></h1>
-    <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记两条能力线（自建音乐平台、网络电台）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
+    <div class="kicker">SenseCAP Watcher · CY 定制版 · Changelog</div>
+    <h1>一块手表的三天，<em>十四个固件版本</em></h1>
+    <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记五条能力线（音乐、电台、逐字字幕、拍照识别、智能家居）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
     <div class="meta">
-      <span class="hot">v1.7.6-handamp 当前</span>
-      <span>7 个已发布版本</span>
-      <span>曲库 120 首 · 电台 21 台 · 待机表情 18 张</span>
-      <span>2026-11-03 → 11-04</span>
+      <span class="hot">v1.7.15-btnfix 当前</span>
+      <span>14 个已发布版本</span>
+      <span>字幕 200 页 · 电台 11 台常听 · 曲库 120 首</span>
+      <span>拍照识别 · 智能家居 170 实体</span>
+      <span>2026-11-03 → 11-05</span>
       <span>每一版都有可回滚镜像</span>
     </div>
   </header>
@@ -161,15 +192,27 @@
     <a href="#v174">v1.7.4</a>
     <a href="#v175">v1.7.5</a>
     <a href="#v176">v1.7.6</a>
+    <a href="#v177">v1.7.7</a>
+    <a href="#v179">v1.7.9</a>
+    <a href="#v1710">v1.7.10</a>
+    <a href="#v1712">v1.7.12</a>
+    <a href="#v1713">v1.7.13</a>
+    <a href="#v1714">v1.7.14</a>
+    <a href="#v1715">v1.7.15</a>
     <a href="#faces">表情图鉴</a>
+    <a href="#emote">角色表情包</a>
+    <a href="#persona">常驻角色</a>
     <a href="#music">音乐平台</a>
     <a href="#radio">网络电台</a>
+    <a href="#subtitle">逐字字幕</a>
+    <a href="#vision">拍照识别</a>
+    <a href="#mijia">智能家居</a>
     <a href="#rule">版本纪律</a>
     <a href="#lesson">沉淀</a>
   </div></nav>
 
   <div class="note">
-    <b>为什么两天能发七版？</b> 因为改了就要立刻上机，上机就会暴露新问题。屏幕上的一个"圈在转"、耳朵里的一声没出，都会变成下一条修复目标——版本号不是为了好看，是为了<b>能退回上一版</b>。
+    <b>为什么三天能发十四版？</b> 因为改了就要立刻上机，上机就会暴露新问题。屏幕上停住不翻的一页字幕、耳朵里一声没出的早报、按了没停的电台，都会变成下一条修复目标——版本号不是为了好看，是为了<b>能退回上一版</b>。
   </div>
 
   <section class="ver" id="base">
@@ -319,6 +362,111 @@
     </div>
   </section>
 
+  <h2 class="sec" style="margin-top:44px">第二日 · 七个版本，全是真机上的具体故障</h2>
+  <div class="note" style="margin:0 0 6px">下午 16:20 之后到第二天中午，问题从「好不好看」变成了「有没有真的出声、有没有真的翻页」。<b>这一轮修的全是链路，不是界面。</b></div>
+
+  <section class="ver" id="v177">
+    <div class="vhead">
+      <span class="tag">v1.7.7</span>
+      <div class="vtitle">清掉一直挂在脸上的生成水印<span class="chip">资产修复</span></div>
+      <div class="vdate">11-04 16:14</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">看 18 张表情大图时才发现，右下角一直挂着「AI 生成」的水印——从 v1.7.2 起就在表上，只是小屏看不清。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">v1.7.2 重做部件动画时换了套生成脚本，直接用了原始底图，而旧打包链里的去水印步骤只跑过一次，没有跟过去。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">水印区收紧 + 取正上方地面块覆盖 + 12px 羽化融合（硬贴会复制出一排咖啡杯、横向色带）。关键是把去水印做成 <code>load_base()</code> 统一入口：<b>底图和闭眼变体必须同源处理</b>，否则差异法会把水印当成「眨眼差异」贴回来。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>资产管线换了入口，旧链的清洗步骤不会自己跟过去；差异法对「两边不一致」零容忍。</div>
+  </section>
+
+  <section class="ver" id="v179">
+    <div class="vhead">
+      <span class="tag">v1.7.9</span>
+      <div class="vtitle">换 WiFi 时别把形象弄丢 + 文字回到屏幕中间<span class="chip">状态机 / UI</span></div>
+      <div class="vdate">11-04 21:28</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">出门切到新 WiFi，动图偶发解码失败一次，旧形象就被<b>永久拆掉</b>，退回一对胶囊眼，直到重启才恢复。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">解码失败只退后台重试（每秒一次，8 秒后转 30 秒慢速重试），不拆对象、不清注入函数；同时把「不再露出胶囊眼」写进可见性判断，内存恢复后自动把形象拉回来。</div></div>
+      <div class="row"><div class="k">顺带</div><div class="v">对话与播报文字改为<b>黑字 + 透明底</b>，浮在待机画面之上并居中排布，长文自动换行占屏，不再压在底部一条实心色带上。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>一次偶发失败不应该改变长期状态。「失败就降级」要带恢复路径，否则就是单向门。</div>
+  </section>
+
+  <section class="ver" id="v1710">
+    <div class="vhead">
+      <span class="tag">v1.7.10</span>
+      <div class="vtitle">新闻优先，以及字幕时间轴贯通<span class="chip">架构性修复</span></div>
+      <div class="vdate">11-04 22:13</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">21:00 晚间新闻没播——当时设备正在放音乐，<b>播放态下压根不去取收件箱</b>。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">播报态也取件，取到语音先停当前播放再起播；播放器只认空闲态，所以「先停再播」是必须的。另一条线把字幕打通：服务端逐段合成时用 Ogg granule 量出精确时长，拼成单条音频并附 <code>subtitles[{start_ms,text}]</code>，收件箱、云端镜像、预约队列、设备端全程透传。</div></div>
+      <div class="row"><div class="k">细节</div><div class="v">有字幕时不再弹整版标题清单卡，避免和滚动字幕叠屏。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>「取到了」不等于「播出了」。游标一旦前移，失败的消息就永久丢了——取件与起播之间必须有确认。</div>
+  </section>
+
+  <section class="ver" id="v1712">
+    <div class="vhead">
+      <span class="tag">v1.7.12</span>
+      <div class="vtitle">字幕停在第一页：给播放器加一口墙钟<span class="chip">进度兜底</span></div>
+      <div class="vdate">11-05 09:51</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">早报字幕只显示第一页，后面十几页不动。</div></div>
+      <div class="row"><div class="k">排查</div><div class="v">先把链路逐段证伪：收件箱 12 条字幕、时间轴 0→1171s 全对；音频是单流 Ogg（OpusHead 只有一个），时长与字幕吻合。固件里「解码进度 → 字幕索引」代码也通。<b>剩下的唯一可能是进度回调实际没喂上来或恒为 0</b>。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">起播后每秒一次 <code>TickProgress</code>：真进度还在往前走就不干预，一旦落后真实时长 1.5 秒以上，直接用起播以来的秒数推进字幕；真进度恢复后自动切回。两条路径共用同一个翻页函数，Stop 必须在锁外停定时器（回调要抢同一把锁，锁内停会死锁）。</div></div>
+      <div class="row"><div class="k">日志</div><div class="v">起播打字幕条数与首末时间点，每次翻页打文本，切换到兜底时打一条 WARN——下次复现一眼能分辨是「没触发」还是「进度卡住」。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>外部回调不可信时，要有一条<b>自己能算的时钟</b>兜底；兜底必须可退出，不能永久接管。</div>
+  </section>
+
+  <section class="ver" id="v1713">
+    <div class="vhead">
+      <span class="tag">v1.7.13</span>
+      <div class="vtitle">标题会翻、正文没出现：根因根本不在固件<span class="chip">正文分页</span></div>
+      <div class="vdate">11-05 10:04</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">v1.7.12 上机后字幕会翻了，但翻的全是<b>标题</b>，正文一段都没出现。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">服务端字幕表存的字段是每条新闻的标题（<code>seg.display</code>），正文 <code>seg.text</code> 从来没进过字幕表。设备端再怎么修进度，也翻不出不存在的东西。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">服务端改成<b>正文分页</b>：按标点把每段正文切成约 45 字一页，页内起点按字数比例摊到该段音频时长；超过上限就自动加大每页字数重排。字幕上限服务端 160 → 200（固件同步 60 → 200），长新闻可到 100+ 页。</div></div>
+      <div class="row"><div class="k">实测</div><div class="v">413 秒 / 40 页那条：设备报 <code>subtitles=40</code>，每约 10 秒翻一页；中途一次 2.3 秒不报进度，由墙钟兜底补上后自动切回。另把新闻播报音量提高 30%（限幅器压住峰值，实测不削波）。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>先确认「喂进去的数据对不对」，再修「显示逻辑」。横跨服务端与固件的链路，最容易在字段语义上错位。</div>
+  </section>
+
+  <section class="ver" id="v1714">
+    <div class="vhead">
+      <span class="tag">v1.7.14</span>
+      <div class="vtitle">说句话就拍照，不用先按一下<span class="chip">语音工具</span></div>
+      <div class="vdate">11-05 11:33</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">做法</div><div class="v">给设备加两个<b>模型可见</b>的工具：说「几多卡路里／呢碟嘢肥唔肥」触发拍照算热量，说「呢度系边度／认下呢个路牌」触发拍照认地点。取图 → POST 二进制 JPEG 到服务端 → 视觉模型识别 → 粤语结论 + 字幕 + 收件箱播报。</div></div>
+      <div class="row"><div class="k">关键</div><div class="v">工具描述里塞满粤语和普通话说法，否则模型会挑平台自带的「识别万物」——那条走平台音色、也没有正文分页字幕。地址不新增配置，直接复用收件箱的命名空间，改一处两边同步。</div></div>
+      <div class="row"><div class="k">兜底</div><div class="v">认不出食物时也播一句「睇唔清，影近啲、避开反光，再嗌我一次」，并把实情回给模型，避免它继续说「马上播报卡路里」。<b>沉默比认错更糟。</b></div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>同一个能力挂两条入口时，得靠工具描述把意图分开；模型的「默认选项」未必是你要的那条。</div>
+  </section>
+
+  <section class="ver" id="v1715">
+    <div class="vhead">
+      <span class="tag">v1.7.15</span>
+      <div class="vtitle">按旋钮停不了电台，以及被吞掉的那条早报<span class="chip">占道根治</span></div>
+      <div class="vdate">11-05 12:35 · 当前</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">听电台时按旋钮没停成，电台一直占着播放通道；结果 12:00 那条早安被设备取走却没播出来，收件箱游标还前移了——<b>消息静默丢失</b>。</div></div>
+      <div class="row"><div class="k">根因①</div><div class="v">单击处理靠「状态记账」猜是不是在播：电台是长连接流，流断或状态回空闲但解码器还在出声时两处同时漏判，单击落到「开始对话」，根本没调 Stop。</div></div>
+      <div class="row"><div class="k">根因②</div><div class="v">起播函数返回 void，设备忙或播放器还占着时会静默 return；调用方不检查是否真起播，却已经清了队列、置了 playing_、推进了游标。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">① 直接读播放器的 <code>active_</code>：播报 / 音乐 / 电台 / 连播任一命中就无条件全停并吞掉这次单击，每次单击打四路状态日志。② 起播后校验「是不是真的起来了」，没起来就把稿放回待播队列继续重试，上限从 12 秒延到 36 秒；卡在播报态时主动让位。</div></div>
+      <div class="row"><div class="k">结果</div><div class="v">真机复测通过。判断有没有真播出，看云端的 <code>playing / audioSeconds</code>，别只看「消息被取走」。</div></div>
+    </div>
+    <div class="lesson"><b>教训：</b>不要用「我以为它在播」的状态变量代替事实；单通道设备上，任何一次「清了队列却没出声」都是永久性丢消息。</div>
+  </section>
+
   <h2 class="sec" id="faces">设备侧 · 18 张待机表情图鉴</h2>
   <p style="color:var(--ink-2);font-size:16px">待机时的轮播阵容——每张都是 <b>12 帧 / 90ms 的部件级动画</b>：眼睛每 1.3 秒眨一次，手部按帧摆动（干净的帧 ±17°，手贴围裙的帧收敛到 ±12°）。下面就是表上实际播出的动图。</p>
 
@@ -346,6 +494,37 @@
     <div class="block" style="margin-top:20px">
       <div class="row"><div class="k">规格</div><div class="v">412×412 源图 → 固件内 12 帧 / 90ms 部件动画；本页为 320px WebP 动图（18 张共 1.2MB）。★ 标出被 v1.7.5 / v1.7.6 动过刀的那张，±12° 是手贴围裙帧的收敛摆幅。</div></div>
     </div>
+  </section>
+
+  <h2 class="sec" id="emote">角色物料 · 四格表情包与硬核风卡面</h2>
+  <p style="color:var(--ink-2);font-size:16px">待机动图之外，还给这个角色做了一套<b>静态表情包</b>：同一张 2×2 设定表切分，再用白底连通域填充抠掉背景、保留透明通道，四张人物比例与配色完全一致。</p>
+  <div class="emogrid">
+    <div class="emo"><img src="assets/emote/smug.webp" alt="得意：坏笑抱臂" loading="lazy"><div class="en"><b>EMO.01</b>得意</div></div>
+    <div class="emo"><img src="assets/emote/angry.webp" alt="生气：嘟嘴抱臂" loading="lazy"><div class="en"><b>EMO.02</b>生气</div></div>
+    <div class="emo"><img src="assets/emote/sleepy.webp" alt="困乏：打哈欠" loading="lazy"><div class="en"><b>EMO.03</b>困乏</div></div>
+    <div class="emo"><img src="assets/emote/shock.webp" alt="震惊：瞪眼张嘴" loading="lazy"><div class="en"><b>EMO.04</b>震惊</div></div>
+  </div>
+  <section class="ver">
+    <div class="block">
+      <div class="row"><div class="k">卡面</div><div class="v">宣传图不用图片编辑器，直接写<b>单页 HTML/CSS</b> 再用无头浏览器截图：暗底 + 荧光绿/青双色、网格线、扫描线、角标框、条形码、背景大字描边。好处是字号、间距、配色全部可版本化重渲染。</div></div>
+      <div class="row"><div class="k">坑</div><div class="v">CSS 网格的行被图片最小高度撑爆，下排直接被裁掉。改成 <code>minmax(0,1fr)</code> + 单元 <code>min-height:0; overflow:hidden</code> + 图片宽高都 100% 才压住。</div></div>
+    </div>
+  </section>
+
+  <h2 class="sec" id="persona">常驻角色 · 它不再是「扮演」，而是「它自己」</h2>
+  <p style="color:var(--ink-2);font-size:16px">给设备定了一个常驻身份：屏幕形象、说话口吻、播报声音三条线各自独立，又能一起出现在同一句回答里。</p>
+  <section class="ver">
+    <div class="block">
+      <div class="row"><div class="k">设定</div><div class="v">人设文档按八块写全（身份、口吻、口头禅、边界、情绪、与用户的关系、禁忌、示例对话），再压成一段可粘贴的控制台版本。角色库新增常驻标记，状态加载时兜底回常驻；「退出扮演」只脱外壳、不脱底色。</div></div>
+      <div class="row"><div class="k">关键</div><div class="v">注入用的是「<b>你就是……</b>」而不是「请扮演……」。写成扮演，长会话里模型会把它当成一件可以随时脱掉的衣服，几轮之后就变回通用助手口吻。</div></div>
+      <div class="row"><div class="k">声音分工</div><div class="v">
+        · <b>新闻 / 播报</b> → 云端 TTS：快、稳、段落时长精确，方便对齐字幕<br>
+        · <b>角色传话 / 提醒 / 闲聊</b> → 本地自然粤语声线：定版声线由参考音频 + 方言标记 + 说话人嵌入确定，实测实时率约 2.7～2.8<br>
+        · <b>实时对话</b> → 平台侧音色（控制台可换、可试听）
+      </div></div>
+      <div class="row"><div class="k">音量</div><div class="v">新闻播报整体 +30%，转码后加限幅器压住峰值；实测平均电平 -17.0dB → -14.5dB、峰值 -1.3dB，不削波。电台里几个偏小的台单独 +50%，同样是「放大 + 限幅」两步，缺了限幅等于白放大。</div></div>
+    </div>
+    <div class="lesson"><b>小结：</b>同一台设备上有三个嗓子是有意为之——速度、自然度、可控性三者不可兼得，按场景分派比强行统一更实用。</div>
   </section>
 
   <h2 class="sec" id="music">服务端之一 · 自建音乐平台</h2>
@@ -442,6 +621,95 @@
     </div>
   </section>
 
+  <h2 class="sec" id="subtitle">服务端之三 · 逐字字幕与准点播报</h2>
+  <p style="color:var(--ink-2);font-size:16px">字幕不是「把文字塞进消息里」这么简单，它横跨合成、分页、预约、镜像、设备解码五段，任何一段没带上都会退化成「只有标题」。</p>
+  <section class="ver">
+    <div class="block">
+      <div class="row"><div class="k">时间轴</div><div class="v">多段新闻用分段合成，每段时长由 Ogg granule 精确量出；整篇图文一次性合成的，先量总时长，再按<b>字数比例</b>摊到各页。正文按标点切约 45 字一页，页内起点按字数比例落在该段音频区间里。</div></div>
+      <div class="row"><div class="k">三条路径</div><div class="v">多段新闻、整篇图文、事件播报<b>都必须带字幕</b>；曾经只有第一条有，后两条上机就露馅。上限统一放到 200 条（服务端 160 页上限 + 设备端 200 条接收）。</div></div>
+      <div class="row"><div class="k">推进</div><div class="v">优先用解码进度；段边界偶发 2～3 秒不报进度，就用墙钟接管，真进度恢复自动切回。详见 v1.7.12 / v1.7.13。</div></div>
+    </div>
+  </section>
+  <section class="ver">
+    <div class="vhead"><span class="tag base">准点</span><div class="vtitle">早报怎么做到 08:00 准时开口</div></div>
+    <div class="block">
+      <div class="row"><div class="k">链路</div><div class="v">本机前夜预生成语音与字幕 → 写入云端预约队列（带释放时间）→ 云端每 10 秒扫描、到点释放进收件箱 → 设备每 5 秒轮询 → 亮屏开播。实测误差 ≤ 15 秒。</div></div>
+      <div class="row"><div class="k">为什么</div><div class="v">临时在 8 点整抓新闻 + 合成 3 分钟音频一定迟到；把重活提前到夜里做，早上只剩「释放」这个动作。</div></div>
+    </div>
+<pre class="flow"><span class="c">前夜</span> 本机预生成（新闻抓取 → TTS → 字幕分页 → 单条 Ogg）
+   <span class="g">→</span> 预约队列 releaseAt=08:00
+<span class="c">08:00</span> 云端 10s 扫描释放 → 收件箱 seq+1
+   <span class="g">→</span> 设备 5s 轮询取件 → 起播 → 字幕跟进度翻页</pre>
+    <div class="lesson"><b>部署纪律：</b>重新部署前必须把云端收件箱拉回本机做一次同步，否则云端序号回退，设备会认为「这些我都听过了」，新消息静默丢失。另外旧预约<b>不会</b>因为改了字幕逻辑自动重做，要手动删掉当天预约再重新预生成。</div>
+  </section>
+
+  <h2 class="sec" id="vision">服务端之四 · 拍照识别：热量、地点、语音指令</h2>
+  <p style="color:var(--ink-2);font-size:16px">设备自带一个摄像头模块（SPI 取 JPEG，单张约 23KB）。这条线把「拍一张照」变成「说一句有用的话」。</p>
+  <section class="ver">
+    <div class="block">
+      <div class="row"><div class="k">食物</div><div class="v">上传 JPEG → 视觉模型输出结构化结果（菜名、组成、估算克数、千卡、蛋白质 / 脂肪 / 碳水、置信度、备注）→ 自然粤语结论 + 字幕播报。另有手机取景页（拍照即出结果）、当日累计与本地留档。</div></div>
+      <div class="row"><div class="k">地点</div><div class="v">模型<b>只准抄字和做客观描述，不准猜城市</b>；把路牌、店招、地标文字交给本地规则库打分，再给区/街道级结论。把「识别」和「判定」拆开，是为了不让模型一本正经地编一个地名。</div></div>
+      <div class="row"><div class="k">统一管道</div><div class="v"><code>enqueueSpeechItem()</code>：一段文字 → 合成语音 → 正文分页字幕 → 收件箱。食物、地点、提醒、智能家居事件全部复用它，所以字幕与音量行为天然一致。</div></div>
+      <div class="row"><div class="k">入口</div><div class="v">Base64 JSON 一条、二进制 JPEG 直传一条（给设备）、手机取景页一条；语音指令那条挂在设备工具上（见 v1.7.14）。</div></div>
+      <div class="row"><div class="k">兜底</div><div class="v">认不出时也播「睇唔清，影近啲、避开反光，再嗌我一次」，并把实情回给模型——<b>沉默比认错更糟</b>。</div></div>
+    </div>
+    <div class="lesson"><b>踩坑：</b>全局 JSON 解析器的 256KB 上限会在路由之前就把照片请求拒成 413，得给大请求体路径开白名单；另外预览图在内存里分配失败只影响屏幕回显，不影响上传，别误判成整个功能挂了。</div>
+  </section>
+
+  <h2 class="sec" id="mijia">服务端之五 · 智能家居（Home Assistant × 米家）全量能力</h2>
+  <p style="color:var(--ink-2);font-size:16px">架构是四段：手表 ↔ 自建服务端 ↔ 本地网关（Home Assistant）↔ 智能家居云。自研设备想直接进厂商 App 需要企业资质，个人侧走不通，所以接的是<b>官方云集成</b>——账号授权后把已有设备同步进本地网关，再由手表用语音控制、用粤语听事件。</p>
+<pre class="flow"><span class="c">语音控制</span> 手表 → AI 服务端（MCP 工具）→ 自建服务端 /api/mi/control
+   <span class="g">→</span> 本地网关 REST /api/services/&lt;domain&gt;/&lt;service&gt; → 设备
+<span class="c">事件播报</span> 设备状态变化 → 本地网关 → 轮询 / webhook → 粤语文案
+   <span class="g">→</span> 统一播报管道（语音 + 字幕）→ 收件箱 → 手表</pre>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">A</span><div class="vtitle">语音控制：能说什么、能控什么</div></div>
+    <table class="cap">
+      <tr><th>入口工具</th><td><span class="pill hot">列设备</span><span class="pill hot">控制</span><span class="pill hot">查状态</span> 三个工具挂进 AI 服务端；平台提示词里写死「涉及家电必须先调工具，不准凭空答好嘅」，并把家电与电台两类意图分开，避免互相误触发。</td></tr>
+      <tr><th>可控设备域</th><td>灯 · 开关/插座 · 风扇 · 空调温控 · 窗帘/卷帘 · 扫地机 · 电视/盒子 · 加湿器 · 热水器 · 门锁 · 场景/脚本/自动化 · 数值/选择/布尔辅助实体 · 警报器 · 阀门 · 按钮 · 遥控器（共 19 类）。传感器域另计：数值、二值、设备追踪、事件。</td></tr>
+      <tr><th>动作全集</th><td><b>开 / 关 / 切换</b>（窗帘转开合、扫地机转启停回充、播放器转播放停止、按钮转按下、场景转触发）<b>亮度 0–100% · 色温 2000–9000K · 颜色</b>（10 色预设）<b>设温度</b>（空调 / 热水器 / 数值实体）<b>空调模式</b>（制冷 / 制热 / 抽湿 / 送风 / 自动）<b>风速</b>（百分比或高/中/低）<b>窗帘位置% · 加湿湿度% · 播放器音量%</b> · 播放 / 暂停 / 上一曲 / 下一曲。<br>不支持的组合返回粤语错误提示，不静默失败。</td></tr>
+      <tr><th>说法归一</th><td>粤语 / 普通话 / 英文混说都收敛成标准动作：「熄灯」「较光啲」「开冷气」「较到 26 度」「制冷」「蓝色」「关所有灯」。模型偶尔把整句话塞进动作字段，也有兜底归一。</td></tr>
+      <tr><th>找设备</th><td>别名表 → 实体 ID 精确/尾段 → 名称精确 → 双向包含 → 短名优先；多个命中给最多 4 个候选而不是乱选一个。支持「所有灯 / 全部插座 / 全屋」批量意图。</td></tr>
+      <tr><th>批量安全</th><td>「关所有灯」会<b>排除指示灯</b>，不误熄摄像机、风扇面板上的状态灯。</td></tr>
+      <tr><th>查状态</th><td>返回自然粤语摘要：开/关 + 亮度%、当前温度、设定温度、湿度%、百分比、电量% 与单位；不念实体 ID。</td></tr>
+      <tr><th>安全闸</th><td><b>语音开锁默认禁用</b>（可以上锁，不能开锁）；令牌、管理端点全部要鉴权；灯与开关的状态变化不进播报白名单。</td></tr>
+    </table>
+  </section>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">B</span><div class="vtitle">事件播报：什么会响、什么不会吵</div></div>
+    <table class="cap">
+      <tr><th>双通道</th><td>本地网关状态每 <b>5 秒</b>轮询一次；另有 <b>webhook</b> 让网关自动化在状态变化瞬间主动推过来（更即时）。两条通道共用同一套文案与防抖，不会重复播。首轮只建基线，不补播开机前的旧状态。</td></tr>
+      <tr><th>会播的事件</th><td><span class="pill">门铃</span><span class="pill">烟雾 / 燃气报警</span><span class="pill">漏水 / 水浸</span><span class="pill">门窗打开</span><span class="pill">人体 / 存在感应</span><span class="pill">低电量</span><span class="pill">门锁开 / 关</span><span class="pill">事件实体</span><span class="pill">防盗警报触发</span><span class="pill">温度过高</span><span class="pill">湿度过高</span>——全部翻译成自然粤语短句，带优先级。</td></tr>
+      <tr><th>监听白名单</th><td>只听二值传感器、门锁、事件、防盗面板、数值传感器；数值传感器里再只看电量 / 温度 / 湿度与关键词（门、窗、人体、烟、燃气、漏水、电量）。<b>灯、开关、空调、风扇、窗帘、播放器、自动化的状态变化一律不播</b>。</td></tr>
+      <tr><th>防吵规则</th><td>同实体同类型 <b>60 秒冷却</b>、全局每分钟最多 <b>3 条</b>、按优先级从高到低播；恢复态与重复触发直接丢弃。</td></tr>
+      <tr><th>出口</th><td>统一播报管道 → 收件箱 → 手表，可选用快声线（事件类求快）或本地角色声线（求口吻一致）。</td></tr>
+    </table>
+  </section>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">C</span><div class="vtitle">网关侧基础设施与运维</div></div>
+    <table class="cap">
+      <tr><th>集成</th><td>官方开源云集成（厂商 2024-12 放出）：OAuth 账号授权 → 选家庭 → 按房间映射 → 过滤设备 → 生成条目。完成后本地实体从 17 个涨到 <b>170 个 / 11 台设备</b>。</td></tr>
+      <tr><th>令牌</th><td>访问令牌 401 时用刷新令牌自动续期，不需要反复手工生成长期令牌；也支持热更新令牌而不重启服务。</td></tr>
+      <tr><th>授权入口</th><td>提供一个「永不过期」的授权地址：每次访问都检查或重建配置流程再跳转登录页，避免昨晚生成的链接第二天失效；配套的桌面双击入口用独立浏览器配置绕开回调域名的本机解析问题。</td></tr>
+      <tr><th>管理端点</th><td><span class="pill dim">状态</span><span class="pill dim">设备列表</span><span class="pill dim">控制</span><span class="pill dim">令牌热更新</span><span class="pill dim">事件 webhook</span><span class="pill dim">播报自测</span><span class="pill dim">授权跳转</span> —— 全部走同一个服务端进程，不另起服务。</td></tr>
+      <tr><th>自启</th><td>本地网关开机自启且隐藏窗口；已在跑就跳过，避免重复实例抢端口。</td></tr>
+    </table>
+  </section>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">D</span><div class="vtitle">当前状态与边界</div></div>
+    <table class="cap">
+      <tr><th>已接通</th><td>集成条目 loaded、170 实体（可控 94 / 传感器 48）、桥接 enabled / connected / polling 全为 true，9 个常用别名干跑全部命中；服务端与本地网关健康检查通过。</td></tr>
+      <tr><th>待实测</th><td>真实门铃 / 传感器触发播报、语音真实改动设备状态尚未做端到端实测（链路已就绪）；另有 4 台设备当前离线，显示为不可用，对它们下控制会失败。</td></tr>
+      <tr><th>可扩展</th><td>蓝牙传感器（人体存在、门磁等）可另用一块 ESP32 做蓝牙代理转发给本地网关，用设备密钥解密后生成二值传感器——正好落在事件白名单里，接好就能播「有人返嚟」。与官方云集成互补：一个管低功耗蓝牙传感器，一个管 WiFi / 云端设备。<b>手表本身保持原固件，不刷成代理。</b></td></tr>
+      <tr><th>不做的事</th><td>不把自研设备伪装成厂商设备（需企业资质）；不开放语音开锁 / 撤防；不让灯的状态变化刷屏。</td></tr>
+    </table>
+    <div class="lesson"><b>小结：</b>这层桥接的价值不是「多一个控制入口」，而是把家电状态变成<b>可听的事件</b>——手表不用一直盯着屏幕，也不用额外装一个 App。</div>
+  </section>
+
   <h2 class="sec" id="rule">版本纪律</h2>
   <p style="color:var(--ink-2);font-size:16px">每一版都走同一套流程，不允许跳步：</p>
   <ol class="rule">
@@ -451,6 +719,7 @@
     <li><b>备份五件套</b>：bootloader / 分区表 / ota_data / 应用镜像 / 资源镜像，按版本号归档。</li>
     <li><b>写台账</b>：追加一条记录，含根因与验证方式。</li>
     <li><b>双分区烧写</b>：运行分区与备用分区写同一份镜像。只写一个的话，一旦回滚就启动另一分区的旧固件，表现为"烧了新版但版本号还是旧的"。</li>
+    <li><b>云端与本机同版本</b>：服务端逻辑改了要同步部署；部署前先把云端收件箱序号拉回本机对齐，旧预约队列里的稿件要手动重做，否则新逻辑只在新稿上生效。</li>
   </ol>
   <div class="note" style="margin-top:18px">判断设备当前版本<b>不要看开机日志里的编译时间</b>（构建系统不刷新那行），看开机打印的 <code>FW vX.Y.Z</code>，或串口敲 <code>version</code>。</div>
 
@@ -462,16 +731,22 @@
     <div class="card"><h3>动画做部件级</h3><p>背景静止、只有眼和手动，既自然又能把体积压下来。</p></div>
     <div class="card"><h3>参数要看图验证</h3><p>坐标标错半格、圆圈压到衣服，只有把帧放大拼一起逐帧比才看得出来。</p></div>
     <div class="card"><h3>每版都能回滚</h3><p>五件套 + 台账，任何一版出问题都能几分钟退回上一版。</p></div>
+    <div class="card"><h3>先查数据，再查显示</h3><p>字幕翻的其实是标题——设备端再怎么修进度，也翻不出服务端根本没放进去的正文。</p></div>
+    <div class="card"><h3>别拿状态记账当事实</h3><p>「我以为它在播」不等于播放器真的在出声。读真实状态，起播后要确认，失败要把稿放回去。</p></div>
+    <div class="card"><h3>外部回调要有自己的钟</h3><p>进度回调会卡、会丢；墙钟兜底能让长播报一直翻页，但必须能自动退出。</p></div>
+    <div class="card"><h3>认不出也要出声</h3><p>沉默、静默失败、游标前移，是用户最没法自救的三种结果。宁可说一句「影近啲」。</p></div>
+    <div class="card"><h3>事件要防抖，播报要排队</h3><p>传感器会连发、会抖动；冷却 + 每分钟上限 + 优先级，才不会把提醒变成噪音。</p></div>
+    <div class="card"><h3>部署前先对齐序号</h3><p>云端序号回退，设备会把新消息当成听过的旧消息——一次部署就能让整天的播报静默消失。</p></div>
   </div>
 
   <footer>
-    <span>SenseCAP Watcher CY 定制版 · 固件版本史</span>
+    <span>SenseCAP Watcher CY 定制版 · 固件与服务端更新日志</span>
     <span>·</span>
     <a href="https://github.com/marchinlab/sensecap-watcher-cy">GitHub 仓库</a>
     <span>·</span>
     <a href="docs/firmware-history.md">Markdown 版本</a>
     <span>·</span>
-    <span>更新至 v1.7.6-handamp（2026-11-04）</span>
+    <span>更新至 v1.7.15-btnfix（2026-11-05）</span>
   </footer>
 </div>
 
