@@ -207,6 +207,15 @@
     <a href="#subtitle">逐字字幕</a>
     <a href="#vision">拍照识别</a>
     <a href="#mijia">智能家居</a>
+    <a href="#week2">第二周起</a>
+    <a href="#v1719">WiFi稳定</a>
+    <a href="#v1720">上云</a>
+    <a href="#v1721">拍照</a>
+    <a href="#v1725">假死治理</a>
+    <a href="#v1747">雷达</a>
+    <a href="#v1749">歌词</a>
+    <a href="#v1752">取证</a>
+    <a href="#v1755">看板</a>
     <a href="#rule">版本纪律</a>
     <a href="#lesson">沉淀</a>
   </div></nav>
@@ -708,6 +717,129 @@
       <tr><th>不做的事</th><td>不把自研设备伪装成厂商设备（需企业资质）；不开放语音开锁 / 撤防；不让灯的状态变化刷屏。</td></tr>
     </table>
     <div class="lesson"><b>小结：</b>这层桥接的价值不是「多一个控制入口」，而是把家电状态变成<b>可听的事件</b>——手表不用一直盯着屏幕，也不用额外装一个 App。</div>
+  </section>
+
+<h2 class="sec" id="week2">第二周起 · 云端、拍照、雷达与看板</h2>
+  <p style="color:var(--ink-2);font-size:16px">公开头三天之后的两周，设备又发了二十多版。下面按时间线挑出最关键的那几条——每一版仍然是被真机上的一个具体现象逼出来的。</p>
+
+  <section class="ver" id="v1719">
+    <div class="vhead">
+      <span class="tag">v1.7.19</span>
+      <div class="vtitle">播放时别让 WiFi 偷偷降档<span class="chip">稳定性</span></div>
+      <div class="vdate">11-06</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">电台和长音频时不时卡顿：欠载 → 断流 → 自动重连，来回死循环。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">播放期间系统把 WiFi 从性能档降回省电档，modem sleep 周期性关射频，音频接收窗口变窄；断流回调又降一次、重连时再拉回。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">加一道播放性能锁：上锁期间拦下所有降档请求，起播成功时上锁、停播前先解锁——顺序反了就会把解锁用的降档也拦掉，省电永久失效。</div></div>
+    </div>
+    <div class="lesson"><b>验证：</b>连播期间 WiFi 全程维持性能档，无欠载；停播后才落回省电。所有走统一起播入口的播放都被覆盖，不只电台。</div>
+  </section>
+
+  <section class="ver" id="v1720">
+    <div class="vhead">
+      <span class="tag">v1.7.20</span>
+      <div class="vtitle">本机不用开机了：播放与播报全部上云<span class="chip">架构</span></div>
+      <div class="vdate">11-06</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">做法</div><div class="v">收件箱消息多带一个播放字段（地址或停播），设备取到就自己起播；没有这个字段的老消息行为完全不变。服务端一份代码双部署：云端下发走公网，本机下发走内网，谁在线谁下发。</div></div>
+      <div class="row"><div class="k">补稿</div><div class="v">新闻加了云端兜底：到点前发现当天预约队列没稿，云端自己抓源、改写、合成语音写进队列，靠队列键去重、不靠心跳，零重复播报。</div></div>
+      <div class="row"><div class="k">决定性验证</div><div class="v">把本机整套服务停掉（本机端口彻底 DOWN、云端仍在线），云端点播电台，设备仍持续增长地拉音频——反证离线链路真的可播。</div></div>
+    </div>
+    <div class="lesson"><b>规矩：</b>谁在线谁下发，速度与离线可用兼顾；云端补稿靠队列键仲裁，而不是靠计时器猜。</div>
+  </section>
+
+  <section class="ver" id="v1721">
+    <div class="vhead">
+      <span class="tag">v1.7.21~24</span>
+      <div class="vtitle">拍照：不是坏了，是被堵死、被"问题"带偏<span class="chip">拍照线</span></div>
+      <div class="vdate">11-09</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象①</div><div class="v">说"拍照"设备回"影唔到相"。根因在设备侧：视觉跟随持续推理把串口塞满，传感器切换失败、拿不到照片。零改动对照——关掉推理再拍立刻成功，直接定位。</div></div>
+      <div class="row"><div class="k">改法①</div><div class="v">加"正在拍照"标志：推理任务见标志就空转让路、不发任何传感器命令；拍照先打断取流、排空缓冲，结束由守卫清标志自动恢复推理。视觉跟随<b>不用永久关闭</b>。</div></div>
+      <div class="row"><div class="k">路由</div><div class="v">默认走平台"识万物"，只有明确的食物/地点口令（含恢复的旧粤语说法）才转自做推理——只改工具描述，零拍摄逻辑改动。</div></div>
+      <div class="row"><div class="k">现象②</div><div class="v">工具其实选对了，回答却全程"定唔到位置"：定位工具的旧描述模板被模型当成了拍照通用提问，把所有照片都当定位处理。</div></div>
+      <div class="row"><div class="k">改法②</div><div class="v">三层同修：固件加硬兜底替换旧模板措辞、参数说明写清模板只在定位时用、服务端按新要求改定位模板并强调"默认识万物"。</div></div>
+    </div>
+    <div class="lesson"><b>坑：</b>版本说明里别再写完整旧版本号，否则编译产物里出现两个版本号，会污染唯一性校验、误判成旧固件。</div>
+  </section>
+
+  <section class="ver" id="v1725">
+    <div class="vhead">
+      <span class="tag">v1.7.25~28</span>
+      <div class="vtitle">重启让它半瘫 18 分钟，看门狗又把播放掐死<span class="chip">假死治理</span></div>
+      <div class="vdate">11-09 ~ 11-10</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">DNS 事故</div><div class="v">开机弹"更新检查失败"。更严重的是官方检查是死循环重试约 18.5 分钟，期间状态卡激活态，而收件箱只在少数状态取件——<b>重启反而让设备半瘫</b>，语音电台全停。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">一拿到 IP 就写静态公共 DNS；更新检查改成"只请求、只解析、绝不安装、失败即放行"；请求失败时从本机存储补回协议配置，否则语音失联；关掉官方回刷。激活从 18.5 分钟缩到约 8 秒。</div></div>
+      <div class="row"><div class="k">看门狗初衷</div><div class="v">设备曾 25 分钟零轮询、指令全积压，而服务端对"设备完全不取件"毫无远程唤醒能力。于是加独立任务：轮询停摆或长时间没成功取件就自重启，预算有限、成功即清零。</div></div>
+      <div class="row"><div class="k">看门狗的坑</div><div class="v">"没成功取件"判据不看播放态——播放中取件本就会头部超时（和音频抢网络客户端），累计到阈值就把正在播的电台掐断，重启后游标已越过指令、不补播，表现为"播半小时突然没声音"。</div></div>
+      <div class="row"><div class="k">修复</div><div class="v">该判据只在待机态生效、播放态豁免；"轮询停摆"判据始终生效但播放态阈值放宽（真卡死照样自愈）；一停播立即恢复严格判定。16 条隔离测试全过。</div></div>
+    </div>
+    <div class="lesson"><b>烧录踩坑：</b>高速率在设备半写态下握手不稳，一次写到中途掉线导致失联数分钟。解法：先让设备停播回空闲、提高握手重试、降速并给足时间。</div>
+  </section>
+
+  <section class="ver" id="v1747">
+    <div class="vhead">
+      <span class="tag">v1.7.47~48 + 服务端</span>
+      <div class="vtitle">实时航班雷达：先把数据接上，再换盘面<span class="chip">新能力</span></div>
+      <div class="vdate">11-17 ~ 11-18</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">数据线</div><div class="v">直连公开 ADS-B 接口（3 分钟缓存）+ 机型信息（6 小时缓存）+ 气象报文；配套 37 个航空电台频道，合并进电台表但<b>不打乱原有常听台编号</b>，沿用现有转码推流链路、固件零改动。</div></div>
+      <div class="row"><div class="k">盘面精修</div><div class="v">同心圆加密、加方位刻度、扫描线加粗、飞机改实心圆点、航班号用小字体。坑：更新函数里一行把字体强行设回默认字体的代码会冲掉小字体，必须删。</div></div>
+      <div class="row"><div class="k">改成龙珠风</div><div class="v">深绿底 + 方格网 + 中心黄色指向三角 + 底部比例尺，去掉扫描线，飞机变带光晕的亮黄点。格线按圆的弦长做物理截断，不用渐变 API（避开编译坑）；动态外推和轮询节流全部不动，只换盘面。</div></div>
+    </div>
+    <div class="lesson"><b>现象：</b>屏幕上能看到的航班位置，是服务端逐帧外推 + 设备本地画点——数据批次和显示刷新各走各的钟。</div>
+  </section>
+
+  <section class="ver" id="v1749">
+    <div class="vhead">
+      <span class="tag">v1.7.49~51</span>
+      <div class="vtitle">歌词：满屏、整版滚动，再跟设备真实进度<span class="chip">音乐线</span></div>
+      <div class="vdate">11-18</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">满屏</div><div class="v">播放浮层从 340px 卡片拉到满屏圆角卡，歌词区 72→200px，左右内边距加大避开圆弧。</div></div>
+      <div class="row"><div class="k">空白之谜</div><div class="v">实拍中间一大块空白——原来标签拉高了但里面只画一行字。改成<b>整版 5 行滚动</b>：固定裁剪窗 + 6 行内容层，当前句在第 2 行，逐句整块上滑，前奏时把歌名填进去兜底。</div></div>
+      <div class="row"><div class="k">加粗与卡顿</div><div class="v">系统字体没有粗体变体，最后用双标签偏移叠印实现。首版用字体描边 + 标题永久滚动 + 每次重写全部行样式，持续抢 CPU 导致卡音；改成静态截断、只在文本真变化时更新，卡顿消失。</div></div>
+      <div class="row"><div class="k">对不上进度</div><div class="v">量出来漂移稳定约 300ms 且不累积，真正问题是字幕只在 2 秒轮询那一刻才换句。改法：设备把真实播放位置报给服务端，服务端给每行起始毫秒，固件用本地定时器自己估算、到点切句——轮询不变，精度约 130ms。</div></div>
+    </div>
+    <div class="lesson"><b>经验：</b>多音字读错先试繁体（粤语词典按频谱比对定音），例如"区域"的"区"、"广交会"的"会"。</div>
+  </section>
+
+  <section class="ver" id="v1752">
+    <div class="vhead">
+      <span class="tag">v1.7.52~54</span>
+      <div class="vtitle">卡顿的病根在接收端，"第二首消失"其实是重启<span class="chip">取证</span></div>
+      <div class="vdate">11-18</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">卡顿回潮</div><div class="v">这次全靠量：建连 3043ms（三次重传）、位置卡住 17 秒、内存吃紧，而服务端推流 100% 实时。问题全在设备接收端——WiFi 接收缓冲被压得极低 + modem sleep，下行包收不稳就重传。加大缓冲、播歌关省电后，建连中位数降到 10ms。</div></div>
+      <div class="row"><div class="k">歌词不滚</div><div class="v">设备推进 4 句后停摆，推流仍实时。两层根因：窗口只有 6 句、本地最多推 4 句就见底；文本未变时直接返回、不补时间轴。扩到 12 句 + 按行号差平移对齐 + 相同文本也补时间轴后，实测推进 30 次全程真跑。</div></div>
+      <div class="row"><div class="k">第二首消失</div><div class="v">决定性证据：设备"消失"后服务端连收三次开机催补 = 连崩三次，崩在 WiFi 初始化定时器创建失败（内存不足）。<b>不是歌词没了，是设备内存耗尽重启</b>。真因是上一版治卡顿时顺手加大的接收缓冲多吃约 20KB——真正治卡顿的是关省电，缓冲属多余。</div></div>
+      <div class="row"><div class="k">修法</div><div class="v">回退缓冲、放宽 socket 上限、加内存闸门（内存低于阈值跳过本轮请求，宁可歌词晚两秒）、切歌时重置窗口。第二首持续播到末尾仍正常滚动。</div></div>
+    </div>
+    <div class="lesson"><b>方法论：</b>先用数据把问题锁死在某一端，再动手。"界面消失"是 UI bug 还是设备重启——猜十次不如量一次。</div>
+  </section>
+
+  <section class="ver" id="v1755">
+    <div class="vhead">
+      <span class="tag">v1.7.55~65</span>
+      <div class="vtitle">WorkBuddy 看板：十一版把一块屏调对<span class="chip">新功能</span></div>
+      <div class="vdate">11-19</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">做什么</div><div class="v">参考开源项目的"余额小鲸鱼"做一块工作状态看板，显示账号、上下文用量、额度、会话与语音用量。形象指定蓝发女仆鲸鱼娘。查下来这个平台没有"充值余额"接口，所以只展示真实字段——<b>绝不编造余额</b>。</div></div>
+      <div class="row"><div class="k">反复推翻</div><div class="v">中文成方框、底部被圆弧裁掉、字体重叠、开头被吞、看不到标题被待机画面盖住……前四版一直在改 flex、宽度、坐标，全都没对症。</div></div>
+      <div class="row"><div class="k">真正的病根</div><div class="v"><b>字库缺字</b>。项目的"基础"字库只是 500 多个常用字的子集，缺的字渲染器直接跳过——不画方框、不留空位、不打日志，看起来就像"开头被吃掉"。用系统全字库单独生成看板专用小字库（152 字形 / 约 100KB）后，全部文案一次显示完整。</div></div>
+      <div class="row"><div class="k">另一条独立坑</div><div class="v">看板只在打开瞬间置顶一次，之后状态机、GIF 轮播、消息卡各自置顶把它压到后面。改成每秒定时器持续抢回最前（音乐浮层同款做法）。</div></div>
+      <div class="row"><div class="k">常亮</div><div class="v">看板最初亮 5 分钟自动收起，后改成打开即常亮、说"收起看板"才退回待机；显式传时长仍可临时限时。只改服务端，固件不动。</div></div>
+    </div>
+    <div class="lesson"><b>最重要的一课：</b>中文"显示不全 / 少了开头"，先查字库覆盖，别先怀疑排版。留下来的字是零散几个 → 缺字；缺的是连续一整段 → 才是裁切。要一直显示在最前，绝不能只置顶一次，必须定时器周期抢。</div>
   </section>
 
   <h2 class="sec" id="rule">版本纪律</h2>
