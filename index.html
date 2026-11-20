@@ -171,14 +171,14 @@
 
   <header class="hero">
     <div class="kicker">SenseCAP Watcher · CY 定制版 · Changelog</div>
-    <h1>一块手表的三天，<em>十四个固件版本</em></h1>
-    <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记五条能力线（音乐、电台、逐字字幕、拍照识别、智能家居）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
+    <h1>一块手表的两周，<em>四十多个固件版本</em></h1>
+    <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记八条能力线（音乐、网络电台、逐字字幕、拍照识别、智能家居、实时航班、航空电台、WorkBuddy 看板）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
     <div class="meta">
-      <span class="hot">v1.7.15-btnfix 当前</span>
-      <span>14 个已发布版本</span>
-      <span>字幕 200 页 · 电台 11 台常听 · 曲库 120 首</span>
-      <span>拍照识别 · 智能家居 170 实体</span>
-      <span>2026-11-03 → 11-05</span>
+      <span class="hot">v1.7.65-board-fullfont 当前</span>
+      <span>40+ 个已发布版本</span>
+      <span>字幕 200 页 · 电台 11 台常听 + 37 个塔台 · 曲库 120 首</span>
+      <span>拍照识别 · 智能家居 170 实体 · 航班雷达 · 工作看板</span>
+      <span>2026-11-03 → 11-20</span>
       <span>每一版都有可回滚镜像</span>
     </div>
   </header>
@@ -200,7 +200,7 @@
     <a href="#v1714">v1.7.14</a>
     <a href="#v1715">v1.7.15</a>
     <a href="#faces">表情图鉴</a>
-    <a href="#emote">角色表情包</a>
+    <a href="#emote">宣传卡面</a>
     <a href="#persona">常驻角色</a>
     <a href="#music">音乐平台</a>
     <a href="#radio">网络电台</a>
@@ -221,7 +221,7 @@
   </div></nav>
 
   <div class="note">
-    <b>为什么三天能发十四版？</b> 因为改了就要立刻上机，上机就会暴露新问题。屏幕上停住不翻的一页字幕、耳朵里一声没出的早报、按了没停的电台，都会变成下一条修复目标——版本号不是为了好看，是为了<b>能退回上一版</b>。
+    <b>为什么两周能发四十多版？</b> 因为改了就要立刻上机，上机就会暴露新问题。屏幕上停住不翻的一页字幕、耳朵里一声没出的早报、按了没停的电台，都会变成下一条修复目标——版本号不是为了好看，是为了<b>能退回上一版</b>。
   </div>
 
   <section class="ver" id="base">
@@ -505,14 +505,8 @@
     </div>
   </section>
 
-  <h2 class="sec" id="emote">角色物料 · 四格表情包与硬核风卡面</h2>
-  <p style="color:var(--ink-2);font-size:16px">待机动图之外，还给这个角色做了一套<b>静态表情包</b>：同一张 2×2 设定表切分，再用白底连通域填充抠掉背景、保留透明通道，四张人物比例与配色完全一致。</p>
-  <div class="emogrid">
-    <div class="emo"><img src="assets/emote/smug.webp" alt="得意：坏笑抱臂" loading="lazy"><div class="en"><b>EMO.01</b>得意</div></div>
-    <div class="emo"><img src="assets/emote/angry.webp" alt="生气：嘟嘴抱臂" loading="lazy"><div class="en"><b>EMO.02</b>生气</div></div>
-    <div class="emo"><img src="assets/emote/sleepy.webp" alt="困乏：打哈欠" loading="lazy"><div class="en"><b>EMO.03</b>困乏</div></div>
-    <div class="emo"><img src="assets/emote/shock.webp" alt="震惊：瞪眼张嘴" loading="lazy"><div class="en"><b>EMO.04</b>震惊</div></div>
-  </div>
+  <h2 class="sec" id="emote">角色物料 · 硬核风宣传卡面</h2>
+  <p style="color:var(--ink-2);font-size:16px">18 张待机动图之外，角色的宣传物料走<b>硬核风卡面</b>：暗底 + 荧光绿/青双色、网格线、扫描线、角标框、条形码、背景大字描边。不用图片编辑器，直接写单页 HTML/CSS 再用无头浏览器截图，好处是字号、间距、配色全部可版本化重渲染。</p>
   <section class="ver">
     <div class="block">
       <div class="row"><div class="k">卡面</div><div class="v">宣传图不用图片编辑器，直接写<b>单页 HTML/CSS</b> 再用无头浏览器截图：暗底 + 荧光绿/青双色、网格线、扫描线、角标框、条形码、背景大字描边。好处是字号、间距、配色全部可版本化重渲染。</div></div>
@@ -878,7 +872,7 @@
     <span>·</span>
     <a href="docs/firmware-history.md">Markdown 版本</a>
     <span>·</span>
-    <span>更新至 v1.7.15-btnfix（2026-11-05）</span>
+    <span>更新至 v1.7.65-board-fullfont（2026-11-20）</span>
   </footer>
 </div>
 
