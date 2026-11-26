@@ -1,94 +1,75 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="SenseCAP Watcher CY 定制版 项目横幅">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0A1020"/>
-      <stop offset="55%" stop-color="#0D1830"/>
-      <stop offset="100%" stop-color="#132038"/>
-    </linearGradient>
-    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#3EE8FF" stop-opacity="0.30"/>
-      <stop offset="60%" stop-color="#3EE8FF" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#3EE8FF" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="bezel" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#3B4B6B"/>
-      <stop offset="45%" stop-color="#1B2438"/>
-      <stop offset="100%" stop-color="#46587C"/>
-    </linearGradient>
-    <linearGradient id="screen" x1="0" y1="0" x2="0.8" y2="1">
-      <stop offset="0%" stop-color="#0A1424"/>
-      <stop offset="100%" stop-color="#050B14"/>
-    </linearGradient>
-    <linearGradient id="eye" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#C9F8FF"/>
-      <stop offset="100%" stop-color="#4FD8F5"/>
-    </linearGradient>
-    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="10"/>
-    </filter>
-    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="22"/>
-    </filter>
+    <style>
+      .h{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+      .m{font-family:"SF Mono",Consolas,"Liberation Mono",monospace}
+    </style>
   </defs>
 
-  <rect width="1200" height="480" fill="url(#bg)"/>
-
-  <!-- 背景网格 -->
-  <g stroke="#5B7BB5" stroke-opacity="0.10" stroke-width="1">
-    <path d="M0 60H1200M0 120H1200M0 180H1200M0 240H1200M0 300H1200M0 360H1200M0 420H1200"/>
-    <path d="M80 0V480M180 0V480M280 0V480M380 0V480M480 0V480M580 0V480M680 0V480M780 0V480M880 0V480M980 0V480M1080 0V480"/>
+  <!-- 白底 + 细网格 -->
+  <rect width="1200" height="480" fill="#ffffff"/>
+  <g stroke="#e6e6e2" stroke-width="1">
+    <path d="M0 80H1200M0 160H1200M0 240H1200M0 320H1200M0 400H1200"/>
+    <path d="M120 0V480M240 0V480M360 0V480M480 0V480M600 0V480M720 0V480M840 0V480M960 0V480M1080 0V480"/>
   </g>
 
-  <!-- 右侧光晕 -->
-  <circle cx="905" cy="240" r="290" fill="url(#halo)"/>
+  <!-- 顶部红色标尺 -->
+  <rect x="0" y="0" width="1200" height="6" fill="#e2231a"/>
+  <rect x="0" y="0" width="180" height="6" fill="#111111"/>
 
-  <!-- 左侧文案 -->
-  <text x="84" y="152" fill="#EAF3FF" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="50" font-weight="700" letter-spacing="1">SenseCAP Watcher</text>
-  <text x="86" y="202" fill="#4FD8F5" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="28" font-weight="500" letter-spacing="8">CY 定制版</text>
+  <!-- kicker -->
+  <rect x="72" y="54" width="24" height="8" fill="#e2231a"/>
+  <text x="108" y="63" class="m" font-size="12" letter-spacing="2.4" font-weight="700" fill="#e2231a">SENSECAP WATCHER · CY EDITION · CHANGELOG</text>
 
-  <text x="86" y="258" fill="#A8BCD8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="23">给一块 ESP32-S3 圆屏手表装上</text>
-  <text x="86" y="296" fill="#A8BCD8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="23">会看人、会播报、会记事的私人 AI 管家</text>
+  <!-- 主标题 -->
+  <text x="72" y="150" class="h" font-size="62" font-weight="800" letter-spacing="-2" fill="#111111">一块手表，</text>
+  <text x="72" y="226" class="h" font-size="62" font-weight="800" letter-spacing="-2" fill="#111111">四十多个</text>
+  <text x="424" y="226" class="h" font-size="62" font-weight="800" letter-spacing="-2" fill="#e2231a">固件版本</text>
+
+  <!-- 副标题 -->
+  <text x="74" y="278" class="h" font-size="20" fill="#3c3c3c">给一块 ESP32-S3 圆屏手表装上会看人、会播报、会记事的私人 AI 管家</text>
+
+  <!-- 数据条 -->
+  <g class="m" font-size="12" fill="#3c3c3c">
+    <rect x="72" y="316" width="520" height="1" fill="#111111"/>
+    <text x="72" y="344">ESP32-S3</text>
+    <text x="196" y="344">LVGL</text>
+    <text x="272" y="344">NODE.JS</text>
+    <text x="372" y="344">MCP × 37</text>
+    <text x="484" y="344">40+ RELEASES</text>
+  </g>
 
   <!-- 标签 -->
-  <g font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="17" fill="#9FE9FA">
-    <rect x="86" y="336" width="118" height="36" rx="18" fill="#4FD8F5" fill-opacity="0.10" stroke="#4FD8F5" stroke-opacity="0.40"/>
-    <text x="111" y="360">自研固件</text>
-    <rect x="216" y="336" width="140" height="36" rx="18" fill="#4FD8F5" fill-opacity="0.10" stroke="#4FD8F5" stroke-opacity="0.40"/>
-    <text x="241" y="360">自建服务端</text>
-    <rect x="368" y="336" width="132" height="36" rx="18" fill="#4FD8F5" fill-opacity="0.10" stroke="#4FD8F5" stroke-opacity="0.40"/>
-    <text x="393" y="360">端到端可控</text>
+  <g class="m" font-size="11" letter-spacing="1.2" font-weight="700">
+    <rect x="72" y="376" width="112" height="32" fill="#111111"/>
+    <text x="84" y="397" fill="#ffffff">自研固件</text>
+    <rect x="196" y="376" width="124" height="32" fill="#111111"/>
+    <text x="208" y="397" fill="#ffffff">自建服务端</text>
+    <rect x="332" y="376" width="124" height="32" fill="#e2231a"/>
+    <text x="344" y="397" fill="#ffffff">端到端可控</text>
   </g>
 
-  <!-- 手表 -->
-  <g transform="translate(905 240)">
-    <ellipse cx="0" cy="0" rx="182" ry="182" fill="#000" fill-opacity="0.55" filter="url(#softer)"/>
-    <circle r="176" fill="url(#bezel)"/>
-    <circle r="158" fill="#0A0F1A"/>
-    <circle r="150" fill="url(#screen)"/>
-
-    <!-- 屏幕反光 -->
-    <path d="M-104 -76 A128 128 0 0 1 96 -96" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="10" fill="none" stroke-linecap="round"/>
-
-    <!-- 眼睛 -->
-    <g>
-      <ellipse cx="-52" cy="-6" rx="27" ry="44" fill="url(#eye)" filter="url(#soft)" opacity="0.85"/>
-      <ellipse cx="52" cy="-6" rx="27" ry="44" fill="url(#eye)" filter="url(#soft)" opacity="0.85"/>
-      <ellipse cx="-52" cy="-6" rx="27" ry="44" fill="url(#eye)"/>
-      <ellipse cx="52" cy="-6" rx="27" ry="44" fill="url(#eye)"/>
-      <!-- 瞳孔：朝向左侧，示意跟随 -->
-      <ellipse cx="-60" cy="-2" rx="9" ry="15" fill="#08202B" opacity="0.65"/>
-      <ellipse cx="44" cy="-2" rx="9" ry="15" fill="#08202B" opacity="0.65"/>
-      <!-- 高光 -->
-      <ellipse cx="-60" cy="-24" rx="7" ry="10" fill="#FFFFFF" opacity="0.75"/>
-      <ellipse cx="44" cy="-24" rx="7" ry="10" fill="#FFFFFF" opacity="0.75"/>
+  <!-- 右侧：几何手表（瑞士风 - 红黑白） -->
+  <g transform="translate(940 240)">
+    <circle r="176" fill="#ffffff" stroke="#111111" stroke-width="3"/>
+    <circle r="160" fill="none" stroke="#e6e6e2" stroke-width="1"/>
+    <circle r="146" fill="#111111"/>
+    <g stroke="#3c3c3c" stroke-width="1" opacity=".55">
+      <path d="M-146 0H146M0 -146V146"/>
     </g>
-
-    <!-- 状态条 -->
-    <rect x="-88" y="72" width="176" height="42" rx="21" fill="#4FD8F5" fill-opacity="0.12" stroke="#4FD8F5" stroke-opacity="0.35"/>
-    <circle cx="-62" cy="93" r="5" fill="#54F0A8"/>
-    <text x="-46" y="98" fill="#BFEFFF" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="15">播报 · 早报 03</text>
+    <circle r="96" fill="none" stroke="#3c3c3c" stroke-width="1" opacity=".5"/>
+    <circle r="52" fill="none" stroke="#3c3c3c" stroke-width="1" opacity=".35"/>
+    <rect x="-62" y="-30" width="44" height="60" fill="#ffffff"/>
+    <rect x="18" y="-30" width="44" height="60" fill="#ffffff"/>
+    <rect x="-50" y="-14" width="16" height="30" fill="#e2231a"/>
+    <rect x="30" y="-14" width="16" height="30" fill="#e2231a"/>
+    <rect x="-88" y="72" width="176" height="30" fill="#e2231a"/>
+    <text x="0" y="92" class="m" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">播报 · 早报 03</text>
+    <text x="-130" y="-108" class="m" font-size="10" fill="#8c8c8c">01 / 37</text>
+    <text x="130" y="-108" class="m" font-size="10" fill="#8c8c8c" text-anchor="end">LIVE</text>
   </g>
 
-  <!-- 底部说明 -->
-  <text x="84" y="432" fill="#6C86A8" font-family="-apple-system, 'Segoe UI', 'Noto Sans SC', 'Microsoft YaHei', sans-serif" font-size="16">ESP32-S3 · LVGL · Node.js · MCP 工具桥接 · 本地唤醒</text>
+  <!-- 底部基线 -->
+  <rect x="72" y="446" width="1056" height="1" fill="#111111"/>
+  <text x="72" y="466" class="m" font-size="10" letter-spacing="1.4" fill="#8c8c8c">2026 — PERSONAL PROJECT · EVERY VERSION REVERTIBLE</text>
 </svg>

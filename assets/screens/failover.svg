@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340" role="img" aria-label="本机云端主备流程">
-<rect width="900" height="340" rx="22" fill="#f7f1e3"/>
-<rect x="8" y="8" width="884" height="324" rx="18" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>
-<text x="450" y="46" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#2b2723">本机全量生产 · 云端待命接管</text>
+<rect width="900" height="340" fill="#ffffff"/>
+<rect x="8" y="8" width="884" height="324" fill="none" stroke="#dcdcd8" stroke-width="1"/>
+<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>
+<text x="450" y="46" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#111111">本机全量生产 · 云端待命接管</text>
 <rect x="40" y="150" width="130" height="72" rx="12" fill="#2f6b62"/>
 <text x="105" y="182" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" fill="#fff">手表 / 手机</text>
 <text x="105" y="204" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="11" fill="#cfe6e0">设备轮询</text>

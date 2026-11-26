@@ -16,7 +16,7 @@ MONO = 'ui-monospace,Consolas,monospace'
 
 
 def wrap(inner, title):
-    """统一纸色卡面 + 深色表壳 + 圆屏裁剪"""
+    """瑞士风白底卡面 + 深色表壳 + 圆屏裁剪（圆屏内部仍是真实界面还原）"""
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 476" width="440" height="476" role="img" aria-label="{title}">
 <defs>
   <radialGradient id="bezel" cx="42%" cy="34%" r="72%">
@@ -24,8 +24,9 @@ def wrap(inner, title):
   </radialGradient>
   <clipPath id="scr"><circle cx="{C}" cy="{C}" r="{R}"/></clipPath>
 </defs>
-<rect width="440" height="476" rx="26" fill="#f7f1e3"/>
-<rect x="6" y="6" width="428" height="464" rx="22" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>
+<rect width="440" height="476" fill="#ffffff"/>
+<rect x="8" y="8" width="424" height="460" fill="none" stroke="#dcdcd8" stroke-width="1"/>
+<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>
 <circle cx="{C}" cy="{C}" r="212" fill="url(#bezel)"/>
 <circle cx="{C}" cy="{C}" r="204" fill="#000" opacity=".55"/>
 <circle cx="{C}" cy="{C}" r="{R+3}" fill="none" stroke="#070707" stroke-width="2"/>
@@ -33,7 +34,8 @@ def wrap(inner, title):
 {inner}
 </g>
 <circle cx="{C}" cy="{C}" r="{R}" fill="none" stroke="#3a352e" stroke-width="3"/>
-<text x="220" y="456" text-anchor="middle" font-family="{FONT}" font-size="12" fill="#8d8071">{title}</text>
+<line x1="24" y1="440" x2="416" y2="440" stroke="#111111" stroke-width="1"/>
+<text x="24" y="459" text-anchor="start" font-family="{MONO}" font-size="11" letter-spacing="1" fill="#8c8c8c">{title}</text>
 </svg>'''
 
 
@@ -208,9 +210,10 @@ def camera():
 def failover():
     """云端主备流程：本机 owner + 云端 standby + 心跳接管"""
     W, H = 900, 340
-    p = [f'<rect width="{W}" height="{H}" rx="22" fill="#f7f1e3"/>',
-         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" rx="18" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>']
-    p.append(f'<text x="450" y="46" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#2b2723">本机全量生产 · 云端待命接管</text>')
+    p = [f'<rect width="{W}" height="{H}" fill="#ffffff"/>',
+         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" fill="none" stroke="#dcdcd8" stroke-width="1"/>',
+         f'<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>']
+    p.append(f'<text x="450" y="46" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#111111">本机全量生产 · 云端待命接管</text>')
     # 手机/设备
     p.append(f'<rect x="40" y="150" width="130" height="72" rx="12" fill="#2f6b62"/>')
     p.append(f'<text x="105" y="182" text-anchor="middle" font-family="{FONT}" font-size="15" fill="#fff">手表 / 手机</text>')
@@ -279,9 +282,10 @@ def route():
 def workflow():
     """WorkBuddy 语音指挥工作流：派活 / 触发 / 问进度 + 实时列工作流"""
     W, H = 900, 390
-    p = [f'<rect width="{W}" height="{H}" rx="22" fill="#f7f1e3"/>',
-         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" rx="18" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>']
-    p.append(f'<text x="450" y="48" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#2b2723">手表说一句话 · 电脑干活 · 回来问结果</text>')
+    p = [f'<rect width="{W}" height="{H}" fill="#ffffff"/>',
+         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" fill="none" stroke="#dcdcd8" stroke-width="1"/>',
+         f'<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>']
+    p.append(f'<text x="450" y="48" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#111111">手表说一句话 · 电脑干活 · 回来问结果</text>')
     p.append('<defs><marker id="aw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5d5347"/></marker></defs>')
     # 四个节点
     nodes = [(30,'手表语音','派活 / 触发 / 问进度','#2f6b62'),

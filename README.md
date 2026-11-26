@@ -1,18 +1,16 @@
-<div align="center">
+<!-- Swiss International Typographic Style · red/black/white · left-aligned · strict grid -->
+
+`SENSECAP WATCHER · CY EDITION · CHANGELOG`
 
 # SenseCAP Watcher · CY 定制版
 
 **给一块 ESP32-S3 圆屏手表装上"会看人、会播报、会记事"的私人 AI 管家**
 
-自研固件 + 自建服务端 · 端到端跑在自己的设备上
-
-<sub>个人项目 · 展示页（不含业务源码）</sub>
+自研固件 + 自建服务端 · 端到端跑在自己的设备上 · 40+ 固件版本 · 每一版都能回滚
 
 在线展示页：<https://marchinlab.github.io/sensecap-watcher-cy/>
 
 <img src="assets/banner.svg" alt="SenseCAP Watcher CY 定制版 项目横幅" width="100%">
-
-</div>
 
 ---
 

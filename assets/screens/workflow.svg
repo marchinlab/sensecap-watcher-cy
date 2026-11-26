@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390" role="img" aria-label="WorkBuddy 语音指挥工作流程">
-<rect width="900" height="390" rx="22" fill="#f7f1e3"/>
-<rect x="8" y="8" width="884" height="374" rx="18" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>
-<text x="450" y="48" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#2b2723">手表说一句话 · 电脑干活 · 回来问结果</text>
+<rect width="900" height="390" fill="#ffffff"/>
+<rect x="8" y="8" width="884" height="374" fill="none" stroke="#dcdcd8" stroke-width="1"/>
+<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>
+<text x="450" y="48" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#111111">手表说一句话 · 电脑干活 · 回来问结果</text>
 <defs><marker id="aw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5d5347"/></marker></defs>
 <rect x="30" y="92" width="165" height="76" rx="13" fill="#2f6b62"/>
 <text x="112" y="124" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="bold" fill="#fff">手表语音</text>
