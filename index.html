@@ -182,12 +182,13 @@
   <header class="hero">
     <div class="kicker">SenseCAP Watcher · CY 定制版 · Changelog</div>
     <h1>一块手表的两周，<em>四十多个固件版本</em></h1>
-    <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记八条能力线（音乐、网络电台、逐字字幕、拍照识别、智能家居、实时航班、航空电台、WorkBuddy 看板）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
+    <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记十条能力线（音乐、网络电台、逐字字幕、拍照识别、智能家居、实时航班、航空电台、WorkBuddy 看板、高德路线规划、语音指挥工作流）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
     <div class="meta">
       <span class="hot">v1.7.66-lyric-nofreeze 当前</span>
       <span>40+ 个已发布版本</span>
       <span>字幕 200 页 · 电台 11 台常听 + 37 个塔台 · 曲库 120 首</span>
       <span>拍照识别 · 智能家居 170 实体 · 航班雷达 · 工作看板</span>
+      <span>高德公交路线规划 · WorkBuddy 语音派活</span>
       <span>2026-11-03 → 11-26</span>
       <span>每一版都有可回滚镜像</span>
     </div>
@@ -195,6 +196,8 @@
       <div class="shot"><img src="assets/screens/radar.svg" alt="航班雷达界面" loading="lazy"><div class="cap"><b>航班雷达</b> · 龙珠盘面，飞机按真实航速移动</div></div>
       <div class="shot"><img src="assets/screens/lyrics.svg" alt="满屏歌词界面" loading="lazy"><div class="cap"><b>满屏歌词</b> · 整版滚动，跟设备真实播放进度</div></div>
       <div class="shot"><img src="assets/screens/board.svg" alt="WorkBuddy看板界面" loading="lazy"><div class="cap"><b>工作看板</b> · 打开即常亮，只读真实字段</div></div>
+      <div class="shot"><img src="assets/screens/route.svg" alt="高德路线规划界面" loading="lazy"><div class="cap"><b>问路线</b> · 默认公交优先，念出来的是换乘方案</div></div>
+      <div class="shot full"><img src="assets/screens/workflow.svg" alt="WorkBuddy语音指挥工作流" loading="lazy"><div class="cap"><b>语音指挥工作流</b> · 手表派活 → 文件队列 → 电脑端执行 → 结果回灌</div></div>
     </div>
   </header>
 
@@ -222,6 +225,8 @@
     <a href="#subtitle">逐字字幕</a>
     <a href="#vision">拍照识别</a>
     <a href="#mijia">智能家居</a>
+    <a href="#amap">高德路线</a>
+    <a href="#wfflow">语音工作流</a>
     <a href="#week2">第二周起</a>
     <a href="#v1719">WiFi稳定</a>
     <a href="#v1720">上云</a>
@@ -729,6 +734,67 @@
       <tr><th>不做的事</th><td>不把自研设备伪装成厂商设备（需企业资质）；不开放语音开锁 / 撤防；不让灯的状态变化刷屏。</td></tr>
     </table>
     <div class="lesson"><b>小结：</b>这层桥接的价值不是「多一个控制入口」，而是把家电状态变成<b>可听的事件</b>——手表不用一直盯着屏幕，也不用额外装一个 App。</div>
+  </section>
+
+  <h2 class="sec" id="amap">服务端之六 · 高德路线规划（问路线默认公交优先）</h2>
+  <p style="color:var(--ink-2);font-size:16px">手表用的不是标准 MCP 客户端，而是自己的 <code>clawbot_*</code> 工具协议——所以「接入高德 MCP」不是去配 mcp.json，而是新增一个工具、底层直连高德 Web 服务 REST API。<b>固件零改动</b>。</p>
+
+  <div class="shots">
+    <div class="shot"><img src="assets/screens/route.svg" alt="高德公交路线规划界面" loading="lazy"><div class="cap"><b>问路线 → 公交优先</b> · 天河城到广州南站：1 号线 4 站转 2 号线 10 站，56 分钟、5 元</div></div>
+  </div>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">A</span><div class="vtitle">接了什么、怎么答</div></div>
+    <table class="cap">
+      <tr><th>新工具</th><td><span class="pill hot">clawbot_route</span>（第 36 个）。描述里写死规则：<b>问路线强制调用，默认公共交通优先</b>；只有明确讲「开车」「行路」才切到对应 mode。</td></tr>
+      <tr><th>接口</th><td>地理编码 <code>/v3/geocode/geo</code>、公交 <code>/v3/direction/transit/integrated</code>（strategy=0，含换乘/票价/步行段）、驾车、步行、骑行、逆地理。8 秒超时，5 分钟缓存。</td></tr>
+      <tr><th>播报文案</th><td>直接给可念的中文：「地铁 1 号线 4 站 → 地铁 2 号线 10 站，56 分钟，5 元」。步行不足 60 秒不念，避免出现「步行 0 分钟」。</td></tr>
+      <tr><th>Key 处理</th><td>不在代码里内置真实 Key，从 <code>config.amapKey</code> 读；缺失时优雅降级为申请指引，不会崩。</td></tr>
+      <tr><th>地名消歧</th><td>「白云机场」不带城市会命中贵阳、「天河城」会命中南昌；带城市查跨城「北京南站」又查不到。改成<b>先带城市查、查不到自动去掉城市全国重查</b>，并以 <code>amapHomeCity</code>（默认广州）定起点，跨城由调用方 city 覆盖。四个场景全对。</td></tr>
+      <tr><th>实测</th><td>天河城→广州南站：56 分钟 / 5 元；广州塔→白云机场：地铁 3 号线 79 分钟 / 8 元；体育西路→广州东站：21 分钟 / 2 元。</td></tr>
+    </table>
+  </section>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">B</span><div class="vtitle">那次「公交权限没开通」的误判</div></div>
+    <table class="cap">
+      <tr><th>现象</th><td>公交接口报 <code>10002 SERVICE_NOT_AVAILABLE</code>、<code>10017 RESOURCE_UNAVAILABLE</code>，第一反应是 Key 没开通「公交路径规划」权限，已经准备让主人去控制台加服务。</td></tr>
+      <tr><th>真因</th><td>接口路径<b>漏了 <code>direction/</code></b>，写成了 <code>/v3/transit/integrated</code>。官方对 10002 的说明列了两个原因：无权限，<b>或者接口路径拼错</b>——这次是后者。路径改正后公交全通，控制台什么都没动。</td></tr>
+      <tr><th>连带的第二个坑</th><td>就算接口通了也解析不出方案：v3 返回的是 <code>route.transits[]</code>，不是 v5 的 <code>transit.routes[]</code>；票价是字符串数字；<code>seg.railway</code> 可能是对象也可能是数组。都按官方文档逐一核过。</td></tr>
+      <tr><th>教训</th><td>API 报错先看官方错误码列出的<b>所有</b>可能原因，别急着下「没开通权限」结论。所有接口路径对照官方文档核一遍。</td></tr>
+    </table>
+    <div class="lesson"><b>小结：</b>这条线没有固件版本——它证明了一件事：<b>能力不等于刷机</b>。工具协议 + 服务端 REST，一样能把一个新服务装进手腕。</div>
+  </section>
+
+  <h2 class="sec" id="wfflow">服务端之七 · 语音指挥 WorkBuddy 工作流</h2>
+  <p style="color:var(--ink-2);font-size:16px">参考一个「机器人 / 工作流」MCP 的设计（列机器人、跟机器人聊、触发工作流），落到自己已有的能力上：<b>手表说一句话，电脑端的 WorkBuddy 干活，回来再问结果</b>。三个场景：派活、触发工作流、问进度；外加一条「现在有哪几条工作流」。</p>
+
+  <div class="shots one">
+    <div class="shot"><img src="assets/screens/workflow.svg" alt="WorkBuddy语音指挥工作流程图" loading="lazy"><div class="cap"><b>派活 → 执行 → 回灌</b> · 手表语音经 clawbot_workbuddy 落到文件队列，电脑端 automation 领走执行，结果写回 result.json，再问就念出来</div></div>
+  </div>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">A</span><div class="vtitle">为什么是文件队列，不是 API</div></div>
+    <table class="cap">
+      <tr><th>调研结论</th><td>WorkBuddy 桌面端没有稳定的对外 API；本地 MCP 代理的鉴权 token 绑会话、会过期。手表是常年运行的设备，不能依赖这种会话态凭据。</td></tr>
+      <tr><th>选的路</th><td><b>本地文件队列桥</b>：queue.json + result.json，原子写、5 分钟去重、结果裁剪到 600 字，状态机 pending / running / done / error。文件最耐长跑，也没有会话过期问题。</td></tr>
+      <tr><th>工具</th><td><span class="pill hot">clawbot_workbuddy</span>（第 37 个），三个 action：<code>dispatch</code> 派活、<code>run_flow</code> 按名字触发同名工作流、<code>status</code> 问进度念结果。配套 CLI 给 automation 调（list / claim / complete / fail）。</td></tr>
+      <tr><th>消费端</th><td>一条 WorkBuddy 自动化任务「手表派活消费桥」按小时跑一次——automation 的最小调度粒度就是小时，所以播报文案说「电脑端定时处理、迟啲问结果」，不说「稍等」。</td></tr>
+      <tr><th>触发工作流</th><td>automation 没有「立即触发另一个 automation」的能力，于是 <code>run_flow</code> 实现为：<b>找到同名任务，按它的 prompt 现在执行一次</b>。</td></tr>
+      <tr><th>端到端</th><td>派活 → claim → complete → 问进度念结果，全通。</td></tr>
+    </table>
+  </section>
+
+  <section class="ver">
+    <div class="vhead"><span class="tag base">B</span><div class="vtitle">「现在有哪几条工作流」：实时读 SQLite</div></div>
+    <table class="cap">
+      <tr><th>发现</th><td>WorkBuddy 的自动化任务其实存在本地 SQLite（WAL 模式）的 <code>automations</code> 表里。Node 自带 <code>node:sqlite</code> 可以只读打开——那就不用走一小时一次的队列，直接实时读。</td></tr>
+      <tr><th>实现</th><td><code>listFlows(limit)</code> 只读打开数据库（immutable 兜底），过滤已删除，按更新时间倒序取最新 N（默认 5、上限 20），同时报总数；把 RRULE 翻成中文调度（每天/每周/每小时 + 暂停态）。</td></tr>
+      <tr><th>触发词</th><td>「现在有哪几条工作流」「列出工作流」「有咩工作流」「WorkBuddy 有几个自动化任务」。</td></tr>
+      <tr><th>实测</th><td>5 条准确（手表派活桥 / 广州台早安 / 维拉巡检 / 鲸鱼娘 PR / 维拉晨报），中文调度与暂停态正确；默认 5、指定 3、上限 20 的边界都过。</td></tr>
+      <tr><th>边界</th><td>云端 standby 没有这份本地数据库，接管时 <code>list_flows</code> 会优雅降级读不到——这条命令主要在本机 owner 生效；派活队列本身走文件，云端正常。</td></tr>
+    </table>
+    <div class="lesson"><b>小结：</b>把手表当成电脑的<b>语音遥控器</b>：不抢电脑的活，只负责「说一句」和「听结果」。这也是整套系统里唯一一条完全不动固件的指挥链。</div>
   </section>
 
 <h2 class="sec" id="week2">第二周起 · 云端、拍照、雷达与看板</h2>

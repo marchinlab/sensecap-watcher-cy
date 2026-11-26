@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 476" width="440" height="476" role="img" aria-label="高德路线 · 公交优先 v1.7.66">
+<defs>
+  <radialGradient id="bezel" cx="42%" cy="34%" r="72%">
+    <stop offset="0%" stop-color="#4a4640"/><stop offset="62%" stop-color="#26231f"/><stop offset="100%" stop-color="#0e0d0b"/>
+  </radialGradient>
+  <clipPath id="scr"><circle cx="220" cy="220" r="196"/></clipPath>
+</defs>
+<rect width="440" height="476" rx="26" fill="#f7f1e3"/>
+<rect x="6" y="6" width="428" height="464" rx="22" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>
+<circle cx="220" cy="220" r="212" fill="url(#bezel)"/>
+<circle cx="220" cy="220" r="204" fill="#000" opacity=".55"/>
+<circle cx="220" cy="220" r="199" fill="none" stroke="#070707" stroke-width="2"/>
+<g clip-path="url(#scr)">
+<rect x="0" y="0" width="440" height="440" fill="#101a24"/>
+<line x1="20" y1="24" x2="-8" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="64" y1="24" x2="36" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="108" y1="24" x2="80" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="152" y1="24" x2="124" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="196" y1="24" x2="168" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="240" y1="24" x2="212" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="284" y1="24" x2="256" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="328" y1="24" x2="300" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="372" y1="24" x2="344" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="416" y1="24" x2="388" y2="416" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="48" x2="416" y2="48" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="100" x2="416" y2="100" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="152" x2="416" y2="152" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="204" x2="416" y2="204" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="256" x2="416" y2="256" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="308" x2="416" y2="308" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="360" x2="416" y2="360" stroke="#1b2b3a" stroke-width="1"/>
+<line x1="24" y1="412" x2="416" y2="412" stroke="#1b2b3a" stroke-width="1"/>
+<path d="M24 292 Q140 256 248 316 Q340 364 416 326" fill="none" stroke="#16384b" stroke-width="13"/>
+<path d="M96 142 L176 142 L176 224 L278 224" fill="none" stroke="#6fd08c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M278 224 L278 292 L344 292" fill="none" stroke="#5aa9f0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="96" cy="142" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>
+<circle cx="176" cy="142" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>
+<circle cx="176" cy="224" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>
+<circle cx="278" cy="224" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>
+<circle cx="278" cy="292" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>
+<circle cx="344" cy="292" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>
+<circle cx="96" cy="142" r="13" fill="#2f6b62" stroke="#fff" stroke-width="2"/>
+<circle cx="344" cy="292" r="13" fill="#b4562f" stroke="#fff" stroke-width="2"/>
+<text x="96" y="146" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#fff">起</text>
+<text x="344" y="296" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#fff">终</text>
+<circle cx="278" cy="224" r="10" fill="#ffd23f" stroke="#101a24" stroke-width="2"/>
+<text x="278" y="228" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10" fill="#3b2c00">换</text>
+<text x="220" y="70" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="18" font-weight="bold" fill="#eaf6ff">路线规划 · 公交优先</text>
+<text x="220" y="94" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#a9c3d8">天河城 → 广州南站</text>
+<text x="96" y="126" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10" fill="#9fc7e0">天河城</text>
+<text x="334" y="314" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10" fill="#9fc7e0">广州南站</text>
+<text x="278" y="212" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="10" fill="#ffd23f">换乘</text>
+<rect x="94" y="326" width="252" height="78" rx="11" fill="#0d2231" stroke="#2f6b62" stroke-width="1.5"/>
+<text x="108" y="352" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#eaf6ff">1号线 4站 → 2号线 10站</text>
+<text x="108" y="376" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#6fd08c">56 分钟 · 5 元 · 步行 6 分钟</text>
+</g>
+<circle cx="220" cy="220" r="196" fill="none" stroke="#3a352e" stroke-width="3"/>
+<text x="220" y="456" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#8d8071">高德路线 · 公交优先 v1.7.66</text>
+</svg>

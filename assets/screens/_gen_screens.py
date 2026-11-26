@@ -238,8 +238,81 @@ def failover():
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="本机云端主备流程">\n' + '\n'.join(p) + '\n</svg>'
 
 
+def route():
+    """高德路线规划：问路线默认公交优先，播报可直接念"""
+    p = [f'<rect x="0" y="0" width="440" height="440" fill="#101a24"/>']
+    # 简化路网底纹
+    for x in range(20, 440, 44):
+        p.append(f'<line x1="{x}" y1="24" x2="{x-28}" y2="416" stroke="#1b2b3a" stroke-width="1"/>')
+    for y in range(48, 440, 52):
+        p.append(f'<line x1="24" y1="{y}" x2="416" y2="{y}" stroke="#1b2b3a" stroke-width="1"/>')
+    # 一条河
+    p.append('<path d="M24 292 Q140 256 248 316 Q340 364 416 326" fill="none" stroke="#16384b" stroke-width="13"/>')
+    # 地铁折线：1 号线（绿）→ 2 号线（蓝）
+    p.append('<path d="M96 142 L176 142 L176 224 L278 224" fill="none" stroke="#6fd08c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>')
+    p.append('<path d="M278 224 L278 292 L344 292" fill="none" stroke="#5aa9f0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>')
+    stops = [(96,142),(176,142),(176,224),(278,224),(278,292),(344,292)]
+    for x, y in stops:
+        p.append(f'<circle cx="{x}" cy="{y}" r="5" fill="#fff" stroke="#101a24" stroke-width="2"/>')
+    # 起终点
+    p.append(f'<circle cx="96" cy="142" r="13" fill="#2f6b62" stroke="#fff" stroke-width="2"/>')
+    p.append(f'<circle cx="344" cy="292" r="13" fill="#b4562f" stroke="#fff" stroke-width="2"/>')
+    p.append(f'<text x="96" y="146" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#fff">起</text>')
+    p.append(f'<text x="344" y="296" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#fff">终</text>')
+    # 换乘标记
+    p.append(f'<circle cx="278" cy="224" r="10" fill="#ffd23f" stroke="#101a24" stroke-width="2"/>')
+    p.append(f'<text x="278" y="228" text-anchor="middle" font-family="{FONT}" font-size="10" fill="#3b2c00">换</text>')
+    # 顶部标题
+    p.append(f'<text x="{C}" y="70" text-anchor="middle" font-family="{FONT}" font-size="18" font-weight="bold" fill="#eaf6ff">路线规划 · 公交优先</text>')
+    p.append(f'<text x="{C}" y="94" text-anchor="middle" font-family="{FONT}" font-size="12" fill="#a9c3d8">天河城 → 广州南站</text>')
+    # 站点名
+    p.append(f'<text x="96" y="126" text-anchor="middle" font-family="{FONT}" font-size="10" fill="#9fc7e0">天河城</text>')
+    p.append(f'<text x="334" y="314" text-anchor="middle" font-family="{FONT}" font-size="10" fill="#9fc7e0">广州南站</text>')
+    p.append(f'<text x="278" y="212" text-anchor="middle" font-family="{FONT}" font-size="10" fill="#ffd23f">换乘</text>')
+    # 方案卡（往圆屏安全区收窄，避免左右下沿被裁）
+    p.append(f'<rect x="94" y="326" width="252" height="78" rx="11" fill="#0d2231" stroke="#2f6b62" stroke-width="1.5"/>')
+    p.append(f'<text x="108" y="352" font-family="{FONT}" font-size="14" font-weight="bold" fill="#eaf6ff">1号线 4站 → 2号线 10站</text>')
+    p.append(f'<text x="108" y="376" font-family="{FONT}" font-size="13" fill="#6fd08c">56 分钟 · 5 元 · 步行 6 分钟</text>')
+    return wrap('\n'.join(p), '高德路线 · 公交优先 v1.7.66')
+
+
+def workflow():
+    """WorkBuddy 语音指挥工作流：派活 / 触发 / 问进度 + 实时列工作流"""
+    W, H = 900, 390
+    p = [f'<rect width="{W}" height="{H}" rx="22" fill="#f7f1e3"/>',
+         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" rx="18" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>']
+    p.append(f'<text x="450" y="48" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#2b2723">手表说一句话 · 电脑干活 · 回来问结果</text>')
+    p.append('<defs><marker id="aw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5d5347"/></marker></defs>')
+    # 四个节点
+    nodes = [(30,'手表语音','派活 / 触发 / 问进度','#2f6b62'),
+             (255,'clawbot_workbuddy','第 37 个工具 · 三场景','#b4562f'),
+             (480,'文件队列桥','queue.json · 原子写','#6b5b8a'),
+             (705,'WorkBuddy 电脑端','automation 每小时消费','#35507a')]
+    for x, t1, t2, col in nodes:
+        p.append(f'<rect x="{x}" y="92" width="165" height="76" rx="13" fill="{col}"/>')
+        p.append(f'<text x="{x+82}" y="124" text-anchor="middle" font-family="{FONT}" font-size="15" font-weight="bold" fill="#fff">{t1}</text>')
+        p.append(f'<text x="{x+82}" y="148" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#f2e8d3">{t2}</text>')
+    for x1, x2 in [(195,255),(420,480),(645,705)]:
+        p.append(f'<path d="M{x1} 130 L{x2-8} 130" stroke="#5d5347" stroke-width="2" fill="none" marker-end="url(#aw)"/>')
+    # 结果回灌
+    p.append(f'<path d="M787 168 Q787 214 640 214 Q330 214 112 168" stroke="#b4562f" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#aw)"/>')
+    p.append(f'<rect x="290" y="196" width="320" height="20" rx="4" fill="#fdfaf2"/>')
+    p.append(f'<text x="450" y="210" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#b4562f">result.json 回灌 · 再问「结果点样」就把结果念出来</text>')
+    # 三个场景卡
+    cards = [(30,'① 派活','电脑帮我做件事 → 排队等电脑端领走'),
+             (315,'② 触发工作流','按名字找到同名任务，立刻按它的 prompt 执行一次'),
+             (600,'③ 问进度 / 列工作流','status 念结果；list_flows 实时读 SQLite 列最新 5 条')]
+    for x, title, desc in cards:
+        p.append(f'<rect x="{x}" y="248" width="270" height="76" rx="11" fill="#f2e8d3" stroke="#d8c9a8"/>')
+        p.append(f'<text x="{x+16}" y="276" font-family="{FONT}" font-size="14" font-weight="bold" fill="#b4562f">{title}</text>')
+        p.append(f'<text x="{x+16}" y="302" font-family="{FONT}" font-size="11" fill="#5d5347">{desc}</text>')
+    p.append(f'<text x="450" y="354" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#8d8071">为什么用文件队列：桌面端无稳定对外 API，本地 MCP token 绑会话会过期——文件最耐长跑</text>')
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="WorkBuddy 语音指挥工作流程">\n' + '\n'.join(p) + '\n</svg>'
+
+
 for name, fn in [('radar', radar), ('lyrics', lyrics), ('board', board),
-                 ('radio', radio), ('camera', camera), ('failover', failover)]:
+                 ('radio', radio), ('camera', camera), ('failover', failover),
+                 ('route', route), ('workflow', workflow)]:
     path = os.path.join(OUT, f'{name}.svg')
     with open(path, 'w', encoding='utf-8') as f:
         f.write(fn())
