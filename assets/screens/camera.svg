@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 476" width="440" height="476" role="img" aria-label="拍照识别 · 食物热量 v1.7.14">
+<defs>
+  <radialGradient id="bezel" cx="42%" cy="34%" r="72%">
+    <stop offset="0%" stop-color="#4a4640"/><stop offset="62%" stop-color="#26231f"/><stop offset="100%" stop-color="#0e0d0b"/>
+  </radialGradient>
+  <clipPath id="scr"><circle cx="220" cy="220" r="196"/></clipPath>
+</defs>
+<rect width="440" height="476" rx="26" fill="#f7f1e3"/>
+<rect x="6" y="6" width="428" height="464" rx="22" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>
+<circle cx="220" cy="220" r="212" fill="url(#bezel)"/>
+<circle cx="220" cy="220" r="204" fill="#000" opacity=".55"/>
+<circle cx="220" cy="220" r="199" fill="none" stroke="#070707" stroke-width="2"/>
+<g clip-path="url(#scr)">
+<rect x="0" y="0" width="440" height="440" fill="#141210"/>
+<text x="220" y="66" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#f5e8c8">睇下呢个</text>
+<line x1="70" y1="92" x2="70" y2="122" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="70" y1="92" x2="100" y2="92" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="370" y1="92" x2="370" y2="122" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="370" y1="92" x2="340" y2="92" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="70" y1="300" x2="70" y2="270" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="70" y1="300" x2="100" y2="300" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="370" y1="300" x2="370" y2="270" stroke="#8fd6a0" stroke-width="3"/>
+<line x1="370" y1="300" x2="340" y2="300" stroke="#8fd6a0" stroke-width="3"/>
+<defs><linearGradient id="food" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a86a"/><stop offset="1" stop-color="#7a4a2f"/></linearGradient></defs>
+<ellipse cx="220" cy="206" rx="82" ry="58" fill="url(#food)"/>
+<ellipse cx="220" cy="196" rx="66" ry="40" fill="#e8c48a" opacity=".7"/>
+<circle cx="254.0" cy="196.0" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="246.0" cy="208.9" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="225.8" cy="215.7" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="202.8" cy="213.3" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="188.0" cy="202.7" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="188.2" cy="189.0" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="203.3" cy="178.6" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="226.3" cy="176.4" r="7" fill="#5c7a3a" opacity=".8"/>
+<circle cx="246.4" cy="183.4" r="7" fill="#5c7a3a" opacity=".8"/>
+<rect x="62" y="320" width="316" height="76" rx="12" fill="#0c1f14" stroke="#2f8a55" stroke-width="1.5"/>
+<text x="80" y="348" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="17" font-weight="bold" fill="#d9ffe6">车仔面 · 约 520 kcal</text>
+<text x="80" y="374" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#8fd6a0">蛋白质 24g · 碳水 61g · 脂肪 18g</text>
+</g>
+<circle cx="220" cy="220" r="196" fill="none" stroke="#3a352e" stroke-width="3"/>
+<text x="220" y="456" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#8d8071">拍照识别 · 食物热量 v1.7.14</text>
+</svg>

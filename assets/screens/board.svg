@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 476" width="440" height="476" role="img" aria-label="WorkBuddy 工作状态看板 v1.7.65">
+<defs>
+  <radialGradient id="bezel" cx="42%" cy="34%" r="72%">
+    <stop offset="0%" stop-color="#4a4640"/><stop offset="62%" stop-color="#26231f"/><stop offset="100%" stop-color="#0e0d0b"/>
+  </radialGradient>
+  <clipPath id="scr"><circle cx="220" cy="220" r="196"/></clipPath>
+</defs>
+<rect width="440" height="476" rx="26" fill="#f7f1e3"/>
+<rect x="6" y="6" width="428" height="464" rx="22" fill="#fdfaf2" stroke="#d8c9a8" stroke-width="1.5"/>
+<circle cx="220" cy="220" r="212" fill="url(#bezel)"/>
+<circle cx="220" cy="220" r="204" fill="#000" opacity=".55"/>
+<circle cx="220" cy="220" r="199" fill="none" stroke="#070707" stroke-width="2"/>
+<g clip-path="url(#scr)">
+<rect x="0" y="0" width="440" height="440" fill="#0d1830"/>
+<defs><radialGradient id="bd" cx="45%" cy="35%" r="75%"><stop offset="0" stop-color="#24457e"/><stop offset="1" stop-color="#12224a"/></radialGradient></defs>
+<circle cx="220" cy="220" r="196" fill="url(#bd)" stroke="#3a63a8" stroke-width="2"/>
+<text x="96" y="86" font-family="ui-monospace,Consolas,monospace" font-size="18" font-weight="bold" fill="#eaf1ff">CY·PRO</text>
+<text x="344" y="86" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="15" fill="#9fc0f0">54%</text>
+<line x1="96" y1="98" x2="344" y2="98" stroke="#3a63a8" stroke-width="1"/>
+<text x="96" y="128" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" fill="#9fc0f0">上下文用量</text>
+<text x="96" y="168" font-family="ui-monospace,Consolas,monospace" font-size="34" font-weight="bold" fill="#ffd23f">47%</text>
+<text x="344" y="166" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="13" fill="#9fc0f0">141k/300k</text>
+<rect x="96" y="180" width="248" height="6" rx="3" fill="#1b2c55"/>
+<rect x="96" y="180" width="117" height="6" rx="3" fill="#ffd23f"/>
+<text x="96" y="222" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" fill="#c9d9f5">● 今日额度消耗</text>
+<text x="344" y="222" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="17" font-weight="bold" fill="#eaf1ff">9435</text>
+<text x="96" y="252" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" fill="#c9d9f5">● 累计额度消耗</text>
+<text x="344" y="252" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="17" font-weight="bold" fill="#eaf1ff">13883</text>
+<text x="96" y="282" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" fill="#c9d9f5">● 今日会话</text>
+<text x="344" y="282" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="17" font-weight="bold" fill="#eaf1ff">6</text>
+<text x="96" y="312" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" fill="#c9d9f5">TTS 本月</text>
+<text x="344" y="312" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="17" font-weight="bold" fill="#eaf1ff">19%</text>
+<line x1="96" y1="330" x2="344" y2="330" stroke="#3a63a8" stroke-width="1"/>
+<text x="96" y="356" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#7fa8e8">● 实时同步</text>
+<circle cx="316" cy="356" r="20" fill="#d9c9f0" opacity=".9"/>
+<circle cx="310" cy="352" r="2.6" fill="#2b2723"/><circle cx="322" cy="352" r="2.6" fill="#2b2723"/>
+<path d="M311 362 Q316 367 321 362" stroke="#2b2723" stroke-width="1.6" fill="none"/>
+</g>
+<circle cx="220" cy="220" r="196" fill="none" stroke="#3a352e" stroke-width="3"/>
+<text x="220" y="456" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#8d8071">WorkBuddy 工作状态看板 v1.7.65</text>
+</svg>

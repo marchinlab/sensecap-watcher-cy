@@ -152,6 +152,16 @@
     table.cap th,table.cap td{padding:6px 7px}
   }
 
+  /* 手表界面效果图 */
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px}
+  .shots.one{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+  .shot{background:#fffdf6;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);text-align:center}
+  .shot img{width:100%;height:auto;display:block;border-radius:8px}
+  .shot .cap{margin-top:8px;font-size:13px;color:var(--ink-3);line-height:1.5}
+  .shot .cap b{color:var(--accent)}
+  .shot.full{grid-column:1/-1}
+  @media (max-width:560px){.shots.one{grid-template-columns:1fr}}
+
   /* 宽屏把 25 个导航入口铺成两行，别让用户以为只有前半页 */
   @media (min-width:900px){
     nav .inner{flex-wrap:wrap;overflow-x:visible;row-gap:4px}
@@ -174,12 +184,17 @@
     <h1>一块手表的两周，<em>四十多个固件版本</em></h1>
     <p class="lead">SenseCAP Watcher CY 定制版（Seeed Studio，ESP32-S3）的更新记录：设备侧逐版记版本号，服务端记八条能力线（音乐、网络电台、逐字字幕、拍照识别、智能家居、实时航班、航空电台、WorkBuddy 看板）。每一版都是被真机上的一个具体现象逼出来的——没有一版是顺手重构。</p>
     <div class="meta">
-      <span class="hot">v1.7.65-board-fullfont 当前</span>
+      <span class="hot">v1.7.66-lyric-nofreeze 当前</span>
       <span>40+ 个已发布版本</span>
       <span>字幕 200 页 · 电台 11 台常听 + 37 个塔台 · 曲库 120 首</span>
       <span>拍照识别 · 智能家居 170 实体 · 航班雷达 · 工作看板</span>
-      <span>2026-11-03 → 11-20</span>
+      <span>2026-11-03 → 11-26</span>
       <span>每一版都有可回滚镜像</span>
+    </div>
+    <div class="shots" style="margin-top:30px">
+      <div class="shot"><img src="assets/screens/radar.svg" alt="航班雷达界面" loading="lazy"><div class="cap"><b>航班雷达</b> · 龙珠盘面，飞机按真实航速移动</div></div>
+      <div class="shot"><img src="assets/screens/lyrics.svg" alt="满屏歌词界面" loading="lazy"><div class="cap"><b>满屏歌词</b> · 整版滚动，跟设备真实播放进度</div></div>
+      <div class="shot"><img src="assets/screens/board.svg" alt="WorkBuddy看板界面" loading="lazy"><div class="cap"><b>工作看板</b> · 打开即常亮，只读真实字段</div></div>
     </div>
   </header>
 
@@ -622,6 +637,9 @@
       <div class="row"><div class="k">工具</div><div class="v">新增三个工具：开台 / 列台 / 停播。台名做了中英别名表（"BBC""国际台""古典台""福克斯""伦敦台""粤曲台"都能认），并且<b>沿用最初那份 21 台清单的编号</b>——说"第 16 台"必须真的是 MSNBC，编号重排过一次会让所有口令错位。</div></div>
       <div class="row"><div class="k">一个"故障"</div><div class="v">播放中喊唤醒词没反应，不是坏了：播音时设备处于播报态，单通道下麦克风不喂唤醒词。要换台就"先按停，再喊唤醒词"。这条最后变成了一张桌面速查图，把 21 台和口令印在一起。</div></div>
     </div>
+    <div class="shots">
+      <div class="shot"><img src="assets/screens/radio.svg" alt="手表常听电台列表" loading="lazy"><div class="cap"><b>手表端电台列表</b> · 常听台编号固定不变，说"第 16 台"永远是同一个台</div></div>
+    </div>
   </section>
 
   <h2 class="sec" id="subtitle">服务端之三 · 逐字字幕与准点播报</h2>
@@ -742,6 +760,9 @@
       <div class="row"><div class="k">决定性验证</div><div class="v">把本机整套服务停掉（本机端口彻底 DOWN、云端仍在线），云端点播电台，设备仍持续增长地拉音频——反证离线链路真的可播。</div></div>
     </div>
     <div class="lesson"><b>规矩：</b>谁在线谁下发，速度与离线可用兼顾；云端补稿靠队列键仲裁，而不是靠计时器猜。</div>
+    <div class="shots one">
+      <div class="shot"><img src="assets/screens/failover.svg" alt="本机云端主备流程" loading="lazy"><div class="cap"><b>本机全量生产 · 云端待命接管</b> · 心跳 10 秒带游标，60 秒无心跳云端接管，本机回来让位并回灌新增消息（不覆盖文件）</div></div>
+    </div>
   </section>
 
   <section class="ver" id="v1721">
@@ -758,6 +779,9 @@
       <div class="row"><div class="k">改法②</div><div class="v">三层同修：固件加硬兜底替换旧模板措辞、参数说明写清模板只在定位时用、服务端按新要求改定位模板并强调"默认识万物"。</div></div>
     </div>
     <div class="lesson"><b>坑：</b>版本说明里别再写完整旧版本号，否则编译产物里出现两个版本号，会污染唯一性校验、误判成旧固件。</div>
+    <div class="shots one">
+      <div class="shot"><img src="assets/screens/camera.svg" alt="拍照识别界面" loading="lazy"><div class="cap"><b>拍照识别</b> · 对准食物/地点拍照，识别结果用粤语念出来；默认"识万物"，明确口令才转自做推理</div></div>
+    </div>
   </section>
 
   <section class="ver" id="v1725">
@@ -788,6 +812,10 @@
       <div class="row"><div class="k">改成龙珠风</div><div class="v">深绿底 + 方格网 + 中心黄色指向三角 + 底部比例尺，去掉扫描线，飞机变带光晕的亮黄点。格线按圆的弦长做物理截断，不用渐变 API（避开编译坑）；动态外推和轮询节流全部不动，只换盘面。</div></div>
     </div>
     <div class="lesson"><b>现象：</b>屏幕上能看到的航班位置，是服务端逐帧外推 + 设备本地画点——数据批次和显示刷新各走各的钟。</div>
+    <div class="shots">
+      <div class="shot"><img src="assets/screens/radar.svg" alt="航班雷达龙珠盘面" loading="lazy"><div class="cap"><b>v1.7.48 龙珠雷达</b> · 深绿方格网 + 同心圆 + 方位刻度 + 黄色指向三角，飞机是带光晕的亮点</div></div>
+      <div class="shot"><img src="assets/screens/atc-page.png" alt="航空电台点播页面" loading="lazy"><div class="cap"><b>航空电台点播页</b> · 37 个塔台频道按地区分组，可网页直听或一键推到手表</div></div>
+    </div>
   </section>
 
   <section class="ver" id="v1749">
@@ -803,6 +831,9 @@
       <div class="row"><div class="k">对不上进度</div><div class="v">量出来漂移稳定约 300ms 且不累积，真正问题是字幕只在 2 秒轮询那一刻才换句。改法：设备把真实播放位置报给服务端，服务端给每行起始毫秒，固件用本地定时器自己估算、到点切句——轮询不变，精度约 130ms。</div></div>
     </div>
     <div class="lesson"><b>经验：</b>多音字读错先试繁体（粤语词典按频谱比对定音），例如"区域"的"区"、"广交会"的"会"。</div>
+    <div class="shots one">
+      <div class="shot"><img src="assets/screens/lyrics.svg" alt="满屏歌词界面" loading="lazy"><div class="cap"><b>v1.7.51 满屏歌词</b> · 当前句高亮、整版上滑，底部进度条跟设备真实播放位置走</div></div>
+    </div>
   </section>
 
   <section class="ver" id="v1752">
@@ -834,6 +865,23 @@
       <div class="row"><div class="k">常亮</div><div class="v">看板最初亮 5 分钟自动收起，后改成打开即常亮、说"收起看板"才退回待机；显式传时长仍可临时限时。只改服务端，固件不动。</div></div>
     </div>
     <div class="lesson"><b>最重要的一课：</b>中文"显示不全 / 少了开头"，先查字库覆盖，别先怀疑排版。留下来的字是零散几个 → 缺字；缺的是连续一整段 → 才是裁切。要一直显示在最前，绝不能只置顶一次，必须定时器周期抢。</div>
+    <div class="shots one">
+      <div class="shot"><img src="assets/screens/board.svg" alt="WorkBuddy看板界面" loading="lazy"><div class="cap"><b>v1.7.65 看板（修好缺字后）</b> · 蓝色圆形底板，账号 / 上下文 / 额度 / 会话 / TTS 一屏读完，打开即常亮</div></div>
+    </div>
+  </section>
+
+  <section class="ver" id="v1766">
+    <div class="vhead">
+      <span class="tag">v1.7.66</span>
+      <div class="vtitle">歌词卡住不动：内存闸门改成"降频不断供"<span class="chip">稳定性</span></div>
+      <div class="vdate">11-20</div>
+    </div>
+    <div class="block">
+      <div class="row"><div class="k">现象</div><div class="v">播歌时歌词冻住不动，要等下一次快照才恢复。</div></div>
+      <div class="row"><div class="k">根因</div><div class="v">内存闸门设成"空闲内存低于 12KB 就完全跳过 now-playing 轮询"，而播歌期间内存在 9~24KB 之间抖动，连着几轮被跳 + 本地 12 句歌词窗口推完，就冻住了。</div></div>
+      <div class="row"><div class="k">改法</div><div class="v">闸门从"跳过"改成<b>降频不断供</b>：内存充足时每 2 秒拉一次，9~12KB 区间每 4 轮（约 8 秒）拉一次，只有低于 9KB 的硬地板才完全跳过保 OOM。歌词不再冻住，内存也守住。</div></div>
+    </div>
+    <div class="lesson"><b>经验：</b>内存闸门这类保护，与其"到线就断供"，不如"到线就降频"——后者既保住内存，又不会让依赖这条数据的界面冻住。</div>
   </section>
 
   <h2 class="sec" id="rule">版本纪律</h2>
@@ -872,7 +920,7 @@
     <span>·</span>
     <a href="docs/firmware-history.md">Markdown 版本</a>
     <span>·</span>
-    <span>更新至 v1.7.65-board-fullfont（2026-11-20）</span>
+    <span>更新至 v1.7.66-lyric-nofreeze（2026-11-20）</span>
   </footer>
 </div>
 
