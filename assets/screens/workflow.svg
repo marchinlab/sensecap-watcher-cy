@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" width="900" height="390" role="img" aria-label="WorkBuddy 语音指挥工作流程">
-<rect width="900" height="390" fill="#ffffff"/>
-<rect x="8" y="8" width="884" height="374" fill="none" stroke="#dcdcd8" stroke-width="1"/>
-<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>
-<text x="450" y="48" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#111111">手表说一句话 · 电脑干活 · 回来问结果</text>
+<defs><linearGradient id="wbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6fb"/><stop offset="55%" stop-color="#f8f7ff"/><stop offset="100%" stop-color="#eff9ff"/></linearGradient>
+<linearGradient id="wrim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff6b9d"/><stop offset="55%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#3fb6e8"/></linearGradient></defs>
+<rect width="900" height="390" fill="url(#wbg)"/>
+<rect x="10" y="10" width="880" height="370" rx="18" fill="#ffffff" fill-opacity=".72" stroke="#eedef0" stroke-width="1.5"/>
+<rect x="28" y="28" width="60" height="6" rx="3" fill="url(#wrim)"/>
+<text x="450" y="48" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="19" font-weight="bold" fill="#33294a">✦ 手表说一句话 · 电脑干活 · 回来问结果</text>
 <defs><marker id="aw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5d5347"/></marker></defs>
 <rect x="30" y="92" width="165" height="76" rx="13" fill="#2f6b62"/>
 <text x="112" y="124" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="15" font-weight="bold" fill="#fff">手表语音</text>
@@ -20,16 +22,16 @@
 <path d="M420 130 L472 130" stroke="#5d5347" stroke-width="2" fill="none" marker-end="url(#aw)"/>
 <path d="M645 130 L697 130" stroke="#5d5347" stroke-width="2" fill="none" marker-end="url(#aw)"/>
 <path d="M787 168 Q787 214 640 214 Q330 214 112 168" stroke="#b4562f" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#aw)"/>
-<rect x="290" y="196" width="320" height="20" rx="4" fill="#fdfaf2"/>
+<rect x="290" y="196" width="320" height="20" rx="6" fill="#f8f7ff"/>
 <text x="450" y="210" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#b4562f">result.json 回灌 · 再问「结果点样」就把结果念出来</text>
-<rect x="30" y="248" width="270" height="76" rx="11" fill="#f2e8d3" stroke="#d8c9a8"/>
-<text x="46" y="276" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#b4562f">① 派活</text>
-<text x="46" y="302" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#5d5347">电脑帮我做件事 → 排队等电脑端领走</text>
-<rect x="315" y="248" width="270" height="76" rx="11" fill="#f2e8d3" stroke="#d8c9a8"/>
-<text x="331" y="276" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#b4562f">② 触发工作流</text>
-<text x="331" y="302" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#5d5347">按名字找到同名任务，立刻按它的 prompt 执行一次</text>
-<rect x="600" y="248" width="270" height="76" rx="11" fill="#f2e8d3" stroke="#d8c9a8"/>
-<text x="616" y="276" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#b4562f">③ 问进度 / 列工作流</text>
-<text x="616" y="302" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#5d5347">status 念结果；list_flows 实时读 SQLite 列最新 5 条</text>
-<text x="450" y="354" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#8d8071">为什么用文件队列：桌面端无稳定对外 API，本地 MCP token 绑会话会过期——文件最耐长跑</text>
+<rect x="30" y="248" width="270" height="76" rx="12" fill="#fff0f7" stroke="#f3d3e4"/>
+<text x="46" y="276" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#ff6b9d">① 派活</text>
+<text x="46" y="302" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#574c70">电脑帮我做件事 → 排队等电脑端领走</text>
+<rect x="315" y="248" width="270" height="76" rx="12" fill="#fff0f7" stroke="#f3d3e4"/>
+<text x="331" y="276" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#ff6b9d">② 触发工作流</text>
+<text x="331" y="302" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#574c70">按名字找到同名任务，立刻按它的 prompt 执行一次</text>
+<rect x="600" y="248" width="270" height="76" rx="12" fill="#fff0f7" stroke="#f3d3e4"/>
+<text x="616" y="276" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="14" font-weight="bold" fill="#ff6b9d">③ 问进度 / 列工作流</text>
+<text x="616" y="302" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#574c70">status 念结果；list_flows 实时读 SQLite 列最新 5 条</text>
+<text x="450" y="354" text-anchor="middle" font-family="'Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#9a8fb0">为什么用文件队列：桌面端无稳定对外 API，本地 MCP token 绑会话会过期——文件最耐长跑</text>
 </svg>

@@ -1,75 +1,168 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="SenseCAP Watcher CY 定制版 项目横幅">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-label="SenseCAP Watcher CY 定制版 项目横幅 · Q版鲸鱼娘">
   <defs>
     <style>
-      .h{font-family:"Helvetica Neue",Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+      .h{font-family:"Yuanti SC","YouYuan","PingFang SC","Microsoft YaHei",sans-serif}
       .m{font-family:"SF Mono",Consolas,"Liberation Mono",monospace}
     </style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff5fa"/><stop offset="52%" stop-color="#f7f6ff"/><stop offset="100%" stop-color="#eef8ff"/>
+    </linearGradient>
+    <linearGradient id="ttl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff6b9d"/><stop offset="55%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#3fb6e8"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="46%" r="58%">
+      <stop offset="0" stop-color="#ffd9ec" stop-opacity=".95"/><stop offset="58%" stop-color="#dcd8ff" stop-opacity=".55"/><stop offset="100%" stop-color="#dcd8ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8aa2ff"/><stop offset="60%" stop-color="#6c86f5"/><stop offset="100%" stop-color="#5470d8"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff0e6"/><stop offset="100%" stop-color="#ffdcc9"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="100%" stop-color="#e7ecff"/>
+    </linearGradient>
   </defs>
 
-  <!-- 白底 + 细网格 -->
-  <rect width="1200" height="480" fill="#ffffff"/>
-  <g stroke="#e6e6e2" stroke-width="1">
-    <path d="M0 80H1200M0 160H1200M0 240H1200M0 320H1200M0 400H1200"/>
-    <path d="M120 0V480M240 0V480M360 0V480M480 0V480M600 0V480M720 0V480M840 0V480M960 0V480M1080 0V480"/>
+  <!-- 粉彩背景 -->
+  <rect width="1200" height="480" fill="url(#bg)"/>
+  <g fill="#ffc4dd" opacity=".55">
+    <circle cx="120" cy="60" r="5"/><circle cx="300" cy="30" r="3"/><circle cx="540" cy="80" r="4"/>
+    <circle cx="700" cy="40" r="3"/><circle cx="1120" cy="70" r="5"/><circle cx="70" cy="400" r="4"/>
+    <circle cx="420" cy="450" r="3"/><circle cx="900" cy="450" r="4"/>
+  </g>
+  <g fill="#c3b6ff" opacity=".6">
+    <path d="M160 120 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z"/>
+    <path d="M660 100 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z"/>
+    <path d="M1090 320 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z"/>
+    <path d="M330 410 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z"/>
   </g>
 
-  <!-- 顶部红色标尺 -->
-  <rect x="0" y="0" width="1200" height="6" fill="#e2231a"/>
-  <rect x="0" y="0" width="180" height="6" fill="#111111"/>
+  <!-- 顶部彩条 -->
+  <rect x="0" y="0" width="1200" height="6" fill="url(#ttl)"/>
 
   <!-- kicker -->
-  <rect x="72" y="54" width="24" height="8" fill="#e2231a"/>
-  <text x="108" y="63" class="m" font-size="12" letter-spacing="2.4" font-weight="700" fill="#e2231a">SENSECAP WATCHER · CY EDITION · CHANGELOG</text>
+  <text x="72" y="76" class="m" font-size="12" letter-spacing="2.6" font-weight="700" fill="#8a7bf7">✦ SENSECAP WATCHER · CY EDITION · CHANGELOG</text>
 
   <!-- 主标题 -->
-  <text x="72" y="150" class="h" font-size="62" font-weight="800" letter-spacing="-2" fill="#111111">一块手表，</text>
-  <text x="72" y="226" class="h" font-size="62" font-weight="800" letter-spacing="-2" fill="#111111">四十多个</text>
-  <text x="424" y="226" class="h" font-size="62" font-weight="800" letter-spacing="-2" fill="#e2231a">固件版本</text>
+  <text x="72" y="164" class="h" font-size="62" font-weight="900" fill="#33294a">一块手表，</text>
+  <text x="72" y="240" class="h" font-size="62" font-weight="900" fill="url(#ttl)">四十多个固件版本</text>
 
   <!-- 副标题 -->
-  <text x="74" y="278" class="h" font-size="20" fill="#3c3c3c">给一块 ESP32-S3 圆屏手表装上会看人、会播报、会记事的私人 AI 管家</text>
+  <text x="74" y="292" class="h" font-size="20" fill="#574c70">给 ESP32-S3 圆屏手表装上会看人、会播报、会记事的私人 AI 管家 ♡</text>
 
-  <!-- 数据条 -->
-  <g class="m" font-size="12" fill="#3c3c3c">
-    <rect x="72" y="316" width="520" height="1" fill="#111111"/>
-    <text x="72" y="344">ESP32-S3</text>
-    <text x="196" y="344">LVGL</text>
-    <text x="272" y="344">NODE.JS</text>
-    <text x="372" y="344">MCP × 37</text>
-    <text x="484" y="344">40+ RELEASES</text>
+  <!-- 数据胶囊 -->
+  <g class="m" font-size="12" font-weight="700">
+    <rect x="72" y="328" width="112" height="34" rx="17" fill="#fff" stroke="#f3d3e4"/>
+    <text x="128" y="350" text-anchor="middle" fill="#ff6b9d">ESP32-S3</text>
+    <rect x="194" y="328" width="74" height="34" rx="17" fill="#fff" stroke="#e0d9fb"/>
+    <text x="231" y="350" text-anchor="middle" fill="#8a7bf7">LVGL</text>
+    <rect x="278" y="328" width="100" height="34" rx="17" fill="#fff" stroke="#d6ecfa"/>
+    <text x="328" y="350" text-anchor="middle" fill="#3fb6e8">NODE.JS</text>
+    <rect x="388" y="328" width="104" height="34" rx="17" fill="#fff" stroke="#f3d3e4"/>
+    <text x="440" y="350" text-anchor="middle" fill="#ff6b9d">MCP × 37</text>
+    <rect x="502" y="328" width="132" height="34" rx="17" fill="#fff" stroke="#e0d9fb"/>
+    <text x="568" y="350" text-anchor="middle" fill="#8a7bf7">40+ RELEASES</text>
   </g>
 
   <!-- 标签 -->
-  <g class="m" font-size="11" letter-spacing="1.2" font-weight="700">
-    <rect x="72" y="376" width="112" height="32" fill="#111111"/>
-    <text x="84" y="397" fill="#ffffff">自研固件</text>
-    <rect x="196" y="376" width="124" height="32" fill="#111111"/>
-    <text x="208" y="397" fill="#ffffff">自建服务端</text>
-    <rect x="332" y="376" width="124" height="32" fill="#e2231a"/>
-    <text x="344" y="397" fill="#ffffff">端到端可控</text>
+  <g class="h" font-size="13" font-weight="800">
+    <rect x="72" y="384" width="112" height="32" rx="16" fill="#ff6b9d"/>
+    <text x="128" y="405" text-anchor="middle" fill="#fff">自研固件</text>
+    <rect x="194" y="384" width="124" height="32" rx="16" fill="#8a7bf7"/>
+    <text x="256" y="405" text-anchor="middle" fill="#fff">自建服务端</text>
+    <rect x="328" y="384" width="124" height="32" rx="16" fill="#3fb6e8"/>
+    <text x="390" y="405" text-anchor="middle" fill="#fff">端到端可控</text>
   </g>
 
-  <!-- 右侧：几何手表（瑞士风 - 红黑白） -->
-  <g transform="translate(940 240)">
-    <circle r="176" fill="#ffffff" stroke="#111111" stroke-width="3"/>
-    <circle r="160" fill="none" stroke="#e6e6e2" stroke-width="1"/>
-    <circle r="146" fill="#111111"/>
-    <g stroke="#3c3c3c" stroke-width="1" opacity=".55">
-      <path d="M-146 0H146M0 -146V146"/>
+  <!-- 右侧：Q版鲸鱼娘（纯 SVG 手绘） -->
+  <g transform="translate(950 244)">
+    <circle r="188" fill="url(#halo)"/>
+    <!-- 星光点缀 -->
+    <g fill="#fff">
+      <path d="M-150 -110 l4 12 12 4 -12 4 -4 12 -4 -12 -12 -4 12 -4z" opacity=".9"/>
+      <path d="M148 -96 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" opacity=".85"/>
+      <path d="M158 96 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z" opacity=".8"/>
     </g>
-    <circle r="96" fill="none" stroke="#3c3c3c" stroke-width="1" opacity=".5"/>
-    <circle r="52" fill="none" stroke="#3c3c3c" stroke-width="1" opacity=".35"/>
-    <rect x="-62" y="-30" width="44" height="60" fill="#ffffff"/>
-    <rect x="18" y="-30" width="44" height="60" fill="#ffffff"/>
-    <rect x="-50" y="-14" width="16" height="30" fill="#e2231a"/>
-    <rect x="30" y="-14" width="16" height="30" fill="#e2231a"/>
-    <rect x="-88" y="72" width="176" height="30" fill="#e2231a"/>
-    <text x="0" y="92" class="m" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">播报 · 早报 03</text>
-    <text x="-130" y="-108" class="m" font-size="10" fill="#8c8c8c">01 / 37</text>
-    <text x="130" y="-108" class="m" font-size="10" fill="#8c8c8c" text-anchor="end">LIVE</text>
+
+    <!-- 双马尾（后层） -->
+    <path d="M-78 -36 Q-150 -70 -142 26 Q-138 84 -96 92 Q-70 88 -80 40 Z" fill="url(#hair)"/>
+    <path d="M78 -36 Q150 -70 142 26 Q138 84 96 92 Q70 88 80 40 Z" fill="url(#hair)"/>
+    <path d="M-132 -8 q-6 46 24 74" stroke="#a8bbff" stroke-width="5" fill="none" opacity=".7" stroke-linecap="round"/>
+    <path d="M132 -8 q6 46 -24 74" stroke="#a8bbff" stroke-width="5" fill="none" opacity=".7" stroke-linecap="round"/>
+
+    <!-- 身体 / 水手服 -->
+    <path d="M-58 92 Q-72 108 -78 176 L78 176 Q72 108 58 92 Z" fill="url(#cloth)" stroke="#c9d2f5" stroke-width="2"/>
+    <path d="M-58 92 Q0 122 58 92 L46 116 Q0 140 -46 116 Z" fill="#6c86f5"/>
+    <path d="M-14 100 L0 128 L14 100" fill="none" stroke="#ff6b9d" stroke-width="4"/>
+    <circle cx="0" cy="132" r="7" fill="#ff6b9d"/>
+    <!-- 鲸鱼尾巴挂饰 -->
+    <path d="M0 140 q-6 18 -26 24 q14 -4 26 -14 q12 10 26 14 q-20 -6 -26 -24z" fill="#8a7bf7" opacity=".9"/>
+
+    <!-- 脸 -->
+    <ellipse cx="0" cy="-22" rx="88" ry="84" fill="url(#skin)"/>
+    <!-- 耳朵 -->
+    <ellipse cx="-86" cy="-16" rx="12" ry="20" fill="#ffdcc9"/>
+    <ellipse cx="86" cy="-16" rx="12" ry="20" fill="#ffdcc9"/>
+
+    <!-- 刘海 / 头顶 -->
+    <path d="M-92 -38 Q-108 -128 -4 -132 Q96 -136 94 -40 Q74 -74 48 -62 Q26 -86 4 -64 Q-22 -90 -48 -64 Q-72 -80 -92 -38 Z" fill="url(#hair)"/>
+    <path d="M-70 -84 Q-40 -112 -8 -104" stroke="#a8bbff" stroke-width="6" fill="none" opacity=".65" stroke-linecap="round"/>
+    <path d="M40 -108 Q70 -100 82 -70" stroke="#a8bbff" stroke-width="5" fill="none" opacity=".5" stroke-linecap="round"/>
+    <!-- 呆毛 -->
+    <path d="M8 -130 q16 -30 34 -22 q-14 2 -16 22" fill="url(#hair)"/>
+
+    <!-- 鲸鱼鳍发饰 -->
+    <g transform="translate(-62 -96) rotate(-24)">
+      <path d="M0 0 Q-26 -16 -34 -2 Q-20 6 0 0Z" fill="#ff9ec4" stroke="#ff6b9d" stroke-width="1.5"/>
+      <path d="M0 0 Q-20 -10 -28 -2" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>
+    </g>
+
+    <!-- 眼睛（大眼 + 高光） -->
+    <g>
+      <ellipse cx="-36" cy="-18" rx="19" ry="24" fill="#fff"/>
+      <ellipse cx="36" cy="-18" rx="19" ry="24" fill="#fff"/>
+      <ellipse cx="-34" cy="-14" rx="13" ry="18" fill="#3b2d6b"/>
+      <ellipse cx="38" cy="-14" rx="13" ry="18" fill="#3b2d6b"/>
+      <ellipse cx="-34" cy="-12" rx="8" ry="12" fill="#6c86f5"/>
+      <ellipse cx="38" cy="-12" rx="8" ry="12" fill="#6c86f5"/>
+      <circle cx="-39" cy="-21" r="5" fill="#fff"/>
+      <circle cx="33" cy="-21" r="5" fill="#fff"/>
+      <circle cx="-29" cy="-6" r="2.5" fill="#fff" opacity=".85"/>
+      <circle cx="43" cy="-6" r="2.5" fill="#fff" opacity=".85"/>
+      <!-- 上睫毛 -->
+      <path d="M-56 -28 q20 -16 40 -2" stroke="#3b2d6b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M16 -30 q20 -14 40 2" stroke="#3b2d6b" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- 眉毛 -->
+      <path d="M-52 -48 q16 -8 30 -1" stroke="#5470d8" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M22 -49 q14 -7 30 1" stroke="#5470d8" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- 腮红 -->
+    <ellipse cx="-58" cy="14" rx="17" ry="9" fill="#ff9fc0" opacity=".55"/>
+    <ellipse cx="58" cy="14" rx="17" ry="9" fill="#ff9fc0" opacity=".55"/>
+    <g stroke="#ff8db4" stroke-width="1.5" opacity=".7">
+      <path d="M-64 11 l-5 5 M-58 10 l-5 6 M-52 11 l-5 5"/>
+      <path d="M52 11 l5 5 M58 10 l5 6 M64 11 l5 5"/>
+    </g>
+    <!-- 嘴（w 形） -->
+    <path d="M-9 28 q9 12 18 0 q-9 6 -18 0z" fill="#e46d8f"/>
+    <path d="M-5 30 q5 6 10 0" stroke="#fff" stroke-width="1.5" fill="none" opacity=".8"/>
+
+    <!-- 手（招手） -->
+    <g transform="translate(74 118) rotate(-18)">
+      <ellipse cx="0" cy="0" rx="15" ry="18" fill="url(#skin)" stroke="#f0c6b3" stroke-width="1.5"/>
+      <path d="M-8 -10 q-6 -12 2 -14 M0 -12 q0 -14 7 -12 M8 -9 q8 -10 12 -3" stroke="#f0c6b3" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- 对话气泡 -->
+    <g transform="translate(-156 -150)">
+      <rect x="-8" y="-34" width="126" height="46" rx="16" fill="#fff" stroke="#f3d3e4" stroke-width="2"/>
+      <path d="M36 12 l-12 16 2 -18z" fill="#fff" stroke="#f3d3e4" stroke-width="2"/>
+      <text x="55" y="-5" text-anchor="middle" class="h" font-size="15" font-weight="800" fill="#ff6b9d">喂吖Be～</text>
+    </g>
   </g>
 
-  <!-- 底部基线 -->
-  <rect x="72" y="446" width="1056" height="1" fill="#111111"/>
-  <text x="72" y="466" class="m" font-size="10" letter-spacing="1.4" fill="#8c8c8c">2026 — PERSONAL PROJECT · EVERY VERSION REVERTIBLE</text>
+  <!-- 底部 -->
+  <rect x="72" y="446" width="1056" height="2" rx="1" fill="url(#ttl)"/>
+  <text x="72" y="468" class="m" font-size="10" letter-spacing="1.2" fill="#9a8fb0">2026 — PERSONAL PROJECT · 每一版都能回滚 · 唤醒词在本地，断网也能喊我</text>
 </svg>

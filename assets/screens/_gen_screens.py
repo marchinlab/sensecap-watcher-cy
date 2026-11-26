@@ -16,26 +16,30 @@ MONO = 'ui-monospace,Consolas,monospace'
 
 
 def wrap(inner, title):
-    """瑞士风白底卡面 + 深色表壳 + 圆屏裁剪（圆屏内部仍是真实界面还原）"""
+    """二次元粉彩卡面 + 渐变表壳 + 圆屏裁剪（圆屏内部仍是真实界面还原）"""
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 476" width="440" height="476" role="img" aria-label="{title}">
 <defs>
-  <radialGradient id="bezel" cx="42%" cy="34%" r="72%">
-    <stop offset="0%" stop-color="#4a4640"/><stop offset="62%" stop-color="#26231f"/><stop offset="100%" stop-color="#0e0d0b"/>
-  </radialGradient>
+  <linearGradient id="cardbg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#fff6fb"/><stop offset="55%" stop-color="#f8f7ff"/><stop offset="100%" stop-color="#eff9ff"/>
+  </linearGradient>
+  <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#b8a8f0"/><stop offset="50%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#ff9ec4"/>
+  </linearGradient>
   <clipPath id="scr"><circle cx="{C}" cy="{C}" r="{R}"/></clipPath>
 </defs>
-<rect width="440" height="476" fill="#ffffff"/>
-<rect x="8" y="8" width="424" height="460" fill="none" stroke="#dcdcd8" stroke-width="1"/>
-<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>
-<circle cx="{C}" cy="{C}" r="212" fill="url(#bezel)"/>
-<circle cx="{C}" cy="{C}" r="204" fill="#000" opacity=".55"/>
-<circle cx="{C}" cy="{C}" r="{R+3}" fill="none" stroke="#070707" stroke-width="2"/>
+<rect width="440" height="476" fill="url(#cardbg)"/>
+<rect x="10" y="10" width="420" height="456" rx="18" fill="#ffffff" fill-opacity=".72" stroke="#eedef0" stroke-width="1.5"/>
+<rect x="24" y="24" width="60" height="6" rx="3" fill="url(#rim)"/>
+<circle cx="404" cy="30" r="4" fill="#ffc4dd"/><circle cx="418" cy="44" r="2.5" fill="#c3b6ff"/>
+<circle cx="{C}" cy="{C}" r="212" fill="url(#rim)"/>
+<circle cx="{C}" cy="{C}" r="204" fill="#3b2d6b" opacity=".9"/>
+<circle cx="{C}" cy="{C}" r="{R+3}" fill="none" stroke="#6c86f5" stroke-width="2"/>
 <g clip-path="url(#scr)">
 {inner}
 </g>
-<circle cx="{C}" cy="{C}" r="{R}" fill="none" stroke="#3a352e" stroke-width="3"/>
-<line x1="24" y1="440" x2="416" y2="440" stroke="#111111" stroke-width="1"/>
-<text x="24" y="459" text-anchor="start" font-family="{MONO}" font-size="11" letter-spacing="1" fill="#8c8c8c">{title}</text>
+<circle cx="{C}" cy="{C}" r="{R}" fill="none" stroke="#8a7bf7" stroke-width="3"/>
+<rect x="24" y="442" width="392" height="2" rx="1" fill="url(#rim)"/>
+<text x="24" y="463" text-anchor="start" font-family="{FONT}" font-size="11" font-weight="bold" letter-spacing="1" fill="#8a7bf7">✦ {title}</text>
 </svg>'''
 
 
@@ -210,10 +214,12 @@ def camera():
 def failover():
     """云端主备流程：本机 owner + 云端 standby + 心跳接管"""
     W, H = 900, 340
-    p = [f'<rect width="{W}" height="{H}" fill="#ffffff"/>',
-         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" fill="none" stroke="#dcdcd8" stroke-width="1"/>',
-         f'<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>']
-    p.append(f'<text x="450" y="46" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#111111">本机全量生产 · 云端待命接管</text>')
+    p = [f'''<defs><linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6fb"/><stop offset="55%" stop-color="#f8f7ff"/><stop offset="100%" stop-color="#eff9ff"/></linearGradient>
+<linearGradient id="frim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff6b9d"/><stop offset="55%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#3fb6e8"/></linearGradient></defs>''',
+         f'<rect width="{W}" height="{H}" fill="url(#fbg)"/>',
+         f'<rect x="10" y="10" width="{W-20}" height="{H-20}" rx="18" fill="#ffffff" fill-opacity=".72" stroke="#eedef0" stroke-width="1.5"/>',
+         f'<rect x="28" y="28" width="60" height="6" rx="3" fill="url(#frim)"/>']
+    p.append(f'<text x="450" y="46" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#33294a">✦ 本机全量生产 · 云端待命接管</text>')
     # 手机/设备
     p.append(f'<rect x="40" y="150" width="130" height="72" rx="12" fill="#2f6b62"/>')
     p.append(f'<text x="105" y="182" text-anchor="middle" font-family="{FONT}" font-size="15" fill="#fff">手表 / 手机</text>')
@@ -234,9 +240,9 @@ def failover():
     p.append(f'<path d="M540 150 Q600 96 650 150" stroke="#2f6b62" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#ar)"/>')
     p.append(f'<text x="596" y="102" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#2f6b62">心跳 10s (带 maxId)</text>')
     # 接管说明
-    p.append(f'<rect x="290" y="250" width="320" height="56" rx="10" fill="#f2e8d3" stroke="#d8c9a8"/>')
-    p.append(f'<text x="450" y="274" text-anchor="middle" font-family="{FONT}" font-size="12" fill="#5d5347">60s 无心跳 → 云端接管播报与播放</text>')
-    p.append(f'<text x="450" y="294" text-anchor="middle" font-family="{FONT}" font-size="12" fill="#5d5347">本机回来 → 让位并回灌新增消息（不覆盖文件）</text>')
+    p.append(f'<rect x="290" y="250" width="320" height="56" rx="12" fill="#fff0f7" stroke="#f3d3e4"/>')
+    p.append(f'<text x="450" y="274" text-anchor="middle" font-family="{FONT}" font-size="12" fill="#574c70">60s 无心跳 → 云端接管播报与播放</text>')
+    p.append(f'<text x="450" y="294" text-anchor="middle" font-family="{FONT}" font-size="12" fill="#574c70">本机回来 → 让位并回灌新增消息（不覆盖文件）</text>')
     p.append(f'<path d="M755 222 Q700 290 610 278" stroke="#35507a" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#ar)"/>')
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="本机云端主备流程">\n' + '\n'.join(p) + '\n</svg>'
 
@@ -282,10 +288,12 @@ def route():
 def workflow():
     """WorkBuddy 语音指挥工作流：派活 / 触发 / 问进度 + 实时列工作流"""
     W, H = 900, 390
-    p = [f'<rect width="{W}" height="{H}" fill="#ffffff"/>',
-         f'<rect x="8" y="8" width="{W-16}" height="{H-16}" fill="none" stroke="#dcdcd8" stroke-width="1"/>',
-         f'<rect x="8" y="8" width="56" height="5" fill="#e2231a"/>']
-    p.append(f'<text x="450" y="48" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#111111">手表说一句话 · 电脑干活 · 回来问结果</text>')
+    p = [f'''<defs><linearGradient id="wbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6fb"/><stop offset="55%" stop-color="#f8f7ff"/><stop offset="100%" stop-color="#eff9ff"/></linearGradient>
+<linearGradient id="wrim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff6b9d"/><stop offset="55%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#3fb6e8"/></linearGradient></defs>''',
+         f'<rect width="{W}" height="{H}" fill="url(#wbg)"/>',
+         f'<rect x="10" y="10" width="{W-20}" height="{H-20}" rx="18" fill="#ffffff" fill-opacity=".72" stroke="#eedef0" stroke-width="1.5"/>',
+         f'<rect x="28" y="28" width="60" height="6" rx="3" fill="url(#wrim)"/>']
+    p.append(f'<text x="450" y="48" text-anchor="middle" font-family="{FONT}" font-size="19" font-weight="bold" fill="#33294a">✦ 手表说一句话 · 电脑干活 · 回来问结果</text>')
     p.append('<defs><marker id="aw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5d5347"/></marker></defs>')
     # 四个节点
     nodes = [(30,'手表语音','派活 / 触发 / 问进度','#2f6b62'),
@@ -300,17 +308,17 @@ def workflow():
         p.append(f'<path d="M{x1} 130 L{x2-8} 130" stroke="#5d5347" stroke-width="2" fill="none" marker-end="url(#aw)"/>')
     # 结果回灌
     p.append(f'<path d="M787 168 Q787 214 640 214 Q330 214 112 168" stroke="#b4562f" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#aw)"/>')
-    p.append(f'<rect x="290" y="196" width="320" height="20" rx="4" fill="#fdfaf2"/>')
+    p.append(f'<rect x="290" y="196" width="320" height="20" rx="6" fill="#f8f7ff"/>')
     p.append(f'<text x="450" y="210" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#b4562f">result.json 回灌 · 再问「结果点样」就把结果念出来</text>')
     # 三个场景卡
     cards = [(30,'① 派活','电脑帮我做件事 → 排队等电脑端领走'),
              (315,'② 触发工作流','按名字找到同名任务，立刻按它的 prompt 执行一次'),
              (600,'③ 问进度 / 列工作流','status 念结果；list_flows 实时读 SQLite 列最新 5 条')]
     for x, title, desc in cards:
-        p.append(f'<rect x="{x}" y="248" width="270" height="76" rx="11" fill="#f2e8d3" stroke="#d8c9a8"/>')
-        p.append(f'<text x="{x+16}" y="276" font-family="{FONT}" font-size="14" font-weight="bold" fill="#b4562f">{title}</text>')
-        p.append(f'<text x="{x+16}" y="302" font-family="{FONT}" font-size="11" fill="#5d5347">{desc}</text>')
-    p.append(f'<text x="450" y="354" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#8d8071">为什么用文件队列：桌面端无稳定对外 API，本地 MCP token 绑会话会过期——文件最耐长跑</text>')
+        p.append(f'<rect x="{x}" y="248" width="270" height="76" rx="12" fill="#fff0f7" stroke="#f3d3e4"/>')
+        p.append(f'<text x="{x+16}" y="276" font-family="{FONT}" font-size="14" font-weight="bold" fill="#ff6b9d">{title}</text>')
+        p.append(f'<text x="{x+16}" y="302" font-family="{FONT}" font-size="11" fill="#574c70">{desc}</text>')
+    p.append(f'<text x="450" y="354" text-anchor="middle" font-family="{FONT}" font-size="11" fill="#9a8fb0">为什么用文件队列：桌面端无稳定对外 API，本地 MCP token 绑会话会过期——文件最耐长跑</text>')
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="WorkBuddy 语音指挥工作流程">\n' + '\n'.join(p) + '\n</svg>'
 
 
