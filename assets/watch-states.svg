@@ -1,93 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="手表三种表情状态：待机、聆听、播报（二次元粉彩）">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" role="img" aria-label="手表三种表情状态：待机、聆听、播报">
   <defs>
     <style>
-      .h{font-family:"Yuanti SC","YouYuan","PingFang SC","Microsoft YaHei",sans-serif}
+      .h{font-family:"Helvetica Neue",Helvetica,"Hiragino Sans","PingFang SC","Microsoft YaHei",sans-serif}
       .m{font-family:"SF Mono",Consolas,"Liberation Mono",monospace}
     </style>
-    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fff8fc"/><stop offset="100%" stop-color="#f2f7ff"/>
-    </linearGradient>
-    <linearGradient id="ttl2" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff6b9d"/><stop offset="55%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#3fb6e8"/>
-    </linearGradient>
-    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff2f8"/><stop offset="100%" stop-color="#eef0ff"/>
-    </linearGradient>
-    <linearGradient id="bezel2" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#b8a8f0"/><stop offset="50%" stop-color="#8a7bf7"/><stop offset="100%" stop-color="#ff9ec4"/>
-    </linearGradient>
   </defs>
 
-  <rect width="1200" height="440" fill="url(#bg2)"/>
-  <g fill="#ffc4dd" opacity=".5">
-    <circle cx="90" cy="70" r="4"/><circle cx="500" cy="40" r="3"/><circle cx="900" cy="60" r="4"/><circle cx="1130" cy="380" r="5"/>
-  </g>
-  <rect x="0" y="0" width="1200" height="6" fill="url(#ttl2)"/>
-  <text x="60" y="48" class="m" font-size="12" letter-spacing="2.2" font-weight="700" fill="#8a7bf7">✦ EXPRESSION STATE MACHINE · 03 STATES</text>
+  <rect width="1200" height="420" fill="#f6f4ee"/>
+  <text x="60" y="48" class="m" font-size="11" letter-spacing="2.5" fill="#8d887e">EXPRESSION STATE MACHINE · 03 STATES</text>
+  <line x1="60" y1="62" x2="1140" y2="62" stroke="#ded9cd"/>
 
   <!-- 待机 -->
-  <g transform="translate(200 194)">
-    <circle r="120" fill="url(#bezel2)"/>
-    <circle r="106" fill="url(#screen)"/>
+  <g transform="translate(200 190)">
+    <circle r="112" fill="none" stroke="#ded9cd" stroke-width="1"/>
+    <circle r="98" fill="#fbfaf6" stroke="#2f2d29" stroke-width="1.5"/>
     <!-- 半睁眼 -->
-    <g fill="#3b2d6b">
-      <path d="M-58 -8 q20 -6 38 0 q-18 16 -38 0z"/>
-      <path d="M20 -8 q20 -6 38 0 q-18 16 -38 0z"/>
+    <g fill="#2f2d29">
+      <path d="M-54 -4 q18 -4 34 0 q-16 12 -34 0z"/>
+      <path d="M20 -4 q18 -4 34 0 q-16 12 -34 0z"/>
     </g>
-    <g fill="#fff" opacity=".9"><circle cx="-40" cy="-3" r="3"/><circle cx="38" cy="-3" r="3"/></g>
-    <ellipse cx="-58" cy="14" rx="12" ry="6" fill="#ff9fc0" opacity=".5"/>
-    <ellipse cx="58" cy="14" rx="12" ry="6" fill="#ff9fc0" opacity=".5"/>
-    <path d="M-8 30 q8 7 16 0" stroke="#e46d8f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <text x="0" y="72" class="m" font-size="10" fill="#9a8fb0" text-anchor="middle">IDLE</text>
+    <text x="0" y="66" class="m" font-size="9.5" fill="#8d887e" text-anchor="middle">IDLE</text>
   </g>
-  <rect x="148" y="328" width="104" height="30" rx="15" fill="url(#ttl2)"/>
-  <text x="200" y="348" class="h" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">待机</text>
-  <text x="200" y="380" class="h" font-size="12.5" fill="#9a8fb0" text-anchor="middle">眼睛半睁 · 东张西望</text>
+  <text x="200" y="336" class="h" font-size="15" font-weight="600" fill="#2f2d29" text-anchor="middle">待机</text>
+  <text x="200" y="362" class="h" font-size="12" fill="#8d887e" text-anchor="middle">眼睛半睁 · 缓慢东张西望</text>
 
   <!-- 聆听 -->
-  <g transform="translate(600 194)">
-    <circle r="120" fill="url(#bezel2)"/>
-    <circle r="106" fill="url(#screen)"/>
+  <g transform="translate(600 190)">
+    <circle r="112" fill="none" stroke="#ded9cd" stroke-width="1"/>
+    <circle r="98" fill="#fbfaf6" stroke="#2f2d29" stroke-width="1.5"/>
     <!-- 放大眼 + 瞳孔朝侧 -->
     <g>
-      <ellipse cx="-38" cy="-8" rx="24" ry="28" fill="#fff" stroke="#d9d2f5" stroke-width="1.5"/>
-      <ellipse cx="38" cy="-8" rx="24" ry="28" fill="#fff" stroke="#d9d2f5" stroke-width="1.5"/>
-      <ellipse cx="-33" cy="-6" rx="15" ry="20" fill="#3b2d6b"/>
-      <ellipse cx="43" cy="-6" rx="15" ry="20" fill="#3b2d6b"/>
-      <circle cx="-39" cy="-14" r="6" fill="#fff"/><circle cx="37" cy="-14" r="6" fill="#fff"/>
-      <circle cx="-27" cy="2" r="3" fill="#fff" opacity=".8"/><circle cx="49" cy="2" r="3" fill="#fff" opacity=".8"/>
+      <ellipse cx="-36" cy="-6" rx="21" ry="25" fill="#fff" stroke="#ded9cd" stroke-width="1"/>
+      <ellipse cx="36" cy="-6" rx="21" ry="25" fill="#fff" stroke="#ded9cd" stroke-width="1"/>
+      <ellipse cx="-31" cy="-4" rx="12" ry="17" fill="#2f2d29"/>
+      <ellipse cx="41" cy="-4" rx="12" ry="17" fill="#2f2d29"/>
+      <circle cx="-35" cy="-11" r="4.5" fill="#fff"/><circle cx="37" cy="-11" r="4.5" fill="#fff"/>
     </g>
     <!-- 声波 -->
-    <g stroke="#8a7bf7" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85">
-      <path d="M-84 34 q-10 -8 -18 0 M-84 46 q-15 -12 -26 0"/>
-      <path d="M84 34 q10 -8 18 0 M84 46 q15 -12 26 0"/>
+    <g stroke="#8d887e" stroke-width="1.5" fill="none" stroke-linecap="round">
+      <path d="M-82 34 q-9 -7 -16 0 M-82 46 q-14 -11 -24 0"/>
+      <path d="M82 34 q9 -7 16 0 M82 46 q14 -11 24 0"/>
     </g>
-    <ellipse cx="-64" cy="18" rx="13" ry="7" fill="#ff9fc0" opacity=".5"/>
-    <ellipse cx="64" cy="18" rx="13" ry="7" fill="#ff9fc0" opacity=".5"/>
-    <text x="0" y="72" class="m" font-size="10" fill="#9a8fb0" text-anchor="middle">LISTENING</text>
+    <text x="0" y="66" class="m" font-size="9.5" fill="#8d887e" text-anchor="middle">LISTENING</text>
   </g>
-  <rect x="548" y="328" width="104" height="30" rx="15" fill="url(#ttl2)"/>
-  <text x="600" y="348" class="h" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">聆听</text>
-  <text x="600" y="380" class="h" font-size="12.5" fill="#9a8fb0" text-anchor="middle">眼睛放大 · 瞳孔找声源</text>
+  <text x="600" y="336" class="h" font-size="15" font-weight="600" fill="#2f2d29" text-anchor="middle">聆听</text>
+  <text x="600" y="362" class="h" font-size="12" fill="#8d887e" text-anchor="middle">眼睛放大 · 瞳孔朝声源</text>
 
   <!-- 播报 -->
-  <g transform="translate(1000 194)">
-    <circle r="120" fill="url(#bezel2)"/>
-    <circle r="106" fill="url(#screen)"/>
+  <g transform="translate(1000 190)">
+    <circle r="112" fill="none" stroke="#ded9cd" stroke-width="1"/>
+    <circle r="98" fill="#fbfaf6" stroke="#2f2d29" stroke-width="1.5"/>
     <!-- 眯眼笑 -->
-    <g stroke="#3b2d6b" stroke-width="4" fill="none" stroke-linecap="round">
-      <path d="M-58 -10 q18 18 38 0"/><path d="M20 -10 q18 18 38 0"/>
+    <g stroke="#2f2d29" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <path d="M-54 -8 q16 14 34 0"/><path d="M20 -8 q16 14 34 0"/>
     </g>
-    <ellipse cx="-62" cy="12" rx="14" ry="8" fill="#ff9fc0" opacity=".6"/>
-    <ellipse cx="62" cy="12" rx="14" ry="8" fill="#ff9fc0" opacity=".6"/>
-    <path d="M-14 26 q14 18 28 0 q-14 8 -28 0z" fill="#e46d8f"/>
-    <!-- 字幕条 -->
-    <rect x="-76" y="52" width="152" height="24" rx="12" fill="#8a7bf7" opacity=".92"/>
-    <text x="0" y="68" class="h" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">播报中 ♪</text>
+    <path d="M-12 26 q12 10 24 0" fill="none" stroke="#9c4a35" stroke-width="2" stroke-linecap="round"/>
+    <rect x="-62" y="44" width="124" height="22" fill="#fbfaf6" stroke="#9c4a35" stroke-width="1"/>
+    <text x="0" y="59" class="h" font-size="10" font-weight="600" fill="#9c4a35" text-anchor="middle">播报中</text>
   </g>
-  <rect x="948" y="328" width="104" height="30" rx="15" fill="url(#ttl2)"/>
-  <text x="1000" y="348" class="h" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">播报</text>
-  <text x="1000" y="380" class="h" font-size="12.5" fill="#9a8fb0" text-anchor="middle">看着你讲 · 句末眨眼</text>
+  <text x="1000" y="336" class="h" font-size="15" font-weight="600" fill="#2f2d29" text-anchor="middle">播报</text>
+  <text x="1000" y="362" class="h" font-size="12" fill="#8d887e" text-anchor="middle">看向人脸 · 句末眨眼</text>
 
-  <rect x="60" y="412" width="1080" height="2" rx="1" fill="url(#ttl2)"/>
+  <line x1="60" y1="398" x2="1140" y2="398" stroke="#ded9cd"/>
 </svg>

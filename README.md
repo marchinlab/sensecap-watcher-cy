@@ -1,14 +1,14 @@
-<!-- Yume Anime Style · 粉彩二次元 · Q版鲸鱼娘 · 圆角卡片 -->
+<!-- MUJI · 無印良品风格 · 温润米白 / 炭灰 / 大留白 / 细线 -->
 
-`✦ SENSECAP WATCHER · CY EDITION · CHANGELOG`
+`SENSECAP WATCHER · CY EDITION · CHANGELOG`
 
 # SenseCAP Watcher · CY 定制版
 
-**给一块 ESP32-S3 圆屏手表装上会看人、会播报、会记事的私人 AI 管家 ♡**
+**给一块 ESP32-S3 圆屏手表装上会看人、会播报、会记事的私人 AI 管家**
 
 自研固件 + 自建服务端 · 端到端跑在自己的设备上 · 40+ 固件版本 · 每一版都能回滚
 
-> ✦ 唤醒词「喂吖Be」在本地识别，断网也能喊我；页面里的 Q 版鲸鱼娘和全部界面图都是纯 SVG 手绘，跟固件一起版本化。
+> 唤醒词「喂吖Be」在本地识别，断网也能喊我。页面里的界面图都是纯 SVG 手绘，跟固件一起版本化。
 
 在线展示页：<https://marchinlab.github.io/sensecap-watcher-cy/>
 
